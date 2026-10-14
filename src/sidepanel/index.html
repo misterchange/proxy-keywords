@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Proxy Keywords</title>
+    <link rel="stylesheet" href="./panel.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <span class="mark"></span>
+      <h1 class="brand">Proxy Keywords</h1>
+      <span class="count" id="count"></span>
+    </header>
+
+    <div class="seg views">
+      <button data-view="run" class="on">Research</button>
+      <button data-view="sources">Sources</button>
+    </div>
+
+    <!-- Research -->
+    <section class="view" id="run">
+      <div class="plate">
+        <h2>The long tail, by country</h2>
+        <p>Upload your seeds. Get every phrase people actually search.</p>
+        <div class="steps">
+          <span class="stepchip"><b>1</b> Upload seeds</span>
+          <span class="stepchip"><b>2</b> Pick a country</span>
+          <span class="stepchip"><b>3</b> Export</span>
+        </div>
+      </div>
+
+      <label>Country <span class="hint">used for rows whose sheet leaves it blank</span>
+        <select id="country"></select>
+      </label>
+
+      <label>Source
+        <select id="source"></select>
+      </label>
+      <p class="hint" id="source-note"></p>
+
+      <input id="file" type="file" hidden
+             accept=".csv,.tsv,.txt,.xlsx,.xlsm,.xls,.ods,text/csv,text/tab-separated-values" />
+
+      <div id="pick">
+        <button type="button" class="choose" id="choose">Choose a sheet…</button>
+        <p class="hint" id="sheet-hint"></p>
+        <button type="button" class="linkish" id="template">Download a template</button>
+      </div>
+
+      <div id="loaded" hidden>
+        <div class="filerow">
+          <span class="filename" id="filename"></span>
+          <button type="button" class="linkish" id="change">change</button>
+        </div>
+        <ul class="problems" id="problems" hidden></ul>
+        <div class="summary" id="summary"></div>
+      </div>
+
+      <button type="button" class="go" id="go" disabled>Run</button>
+      <button type="button" class="linkish stop" id="stop" hidden>Stop</button>
+
+      <!-- Progress and results -->
+      <div id="progress" hidden>
+        <div class="bar"><span id="bar-fill"></span></div>
+        <div class="hint" id="progress-note"></div>
+      </div>
+
+      <div id="results" hidden>
+        <div class="resrow">
+          <span class="summary" id="res-count"></span>
+          <button type="button" class="go small" id="export">Export CSV</button>
+        </div>
+        <ul class="kw" id="kw"></ul>
+        <ul class="problems" id="notes" hidden></ul>
+        <button type="button" class="linkish" id="clear">Clear run</button>
+      </div>
+    </section>
+
+    <!-- Sources -->
+    <section class="view" id="sources" hidden>
+      <div class="plate">
+        <h2>Where the numbers come from</h2>
+        <p>Stated plainly, including what each one can't tell you.</p>
+      </div>
+      <ul class="srcs" id="srcs"></ul>
+
+      <div class="label">Not used, and why</div>
+      <ul class="srcs" id="rejected"></ul>
+
+      <div class="label">Worth adding next</div>
+      <ul class="srcs" id="roadmap"></ul>
+    </section>
+
+    <script type="module" src="./panel.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+node_modules/
+dist/
+dist-dev/
+*.zip
+
+# Supercell Magic is Supercell's brand font, not ours to redistribute.
+# It stays on disk so a local build looks right; the CSS falls back to
+# Inter and then the system face for anyone who clones this.
+src/assets/fonts/

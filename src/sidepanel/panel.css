@@ -1,0 +1,515 @@
+/* Proxy Keywords — side panel.
+ *
+ * Third in the family, after Director and Poster, and deliberately the same
+ * furniture: sand ground, cream cards, charcoal plate, moulded neumorphism on
+ * anything you press. Someone who has seen one should recognise this on sight.
+ *
+ * ONE TOKEN DIFFERS. `--neon` is teal here rather than amber. The products are
+ * siblings, not clones, and the accent is the cheapest way to say which one you
+ * have open — amber for video, teal for search. Everything else is copied
+ * verbatim rather than approximated, because a near-miss on the ground colour
+ * reads as a knock-off where an obvious, single, deliberate difference reads as
+ * a range.
+ */
+
+/**
+ * Supercell Magic — the same face Proxy Director uses.
+ *
+ * Bundled, not linked: an extension page's CSP blocks remote fonts outright,
+ * so there is no CDN path that works here. Vite hashes the file and rewrites
+ * the relative URL below.
+ *
+ * Only a regular weight exists in the file, so `font-weight: 400` is declared
+ * honestly and bold is synthesised. Declaring `400 700` would tell the browser
+ * this file covers bold and stop the faux-bolding, leaving headings visually
+ * identical to body text.
+ */
+@font-face {
+  font-family: 'Supercell Magic';
+  src: url('../assets/fonts/supercell-magic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg: #e9dfd0;
+  --bg-elev: #fffdfa;
+  --bg-elev-2: #fbf7f1;
+
+  --line: rgba(47, 42, 36, 0.1);
+  --line-strong: rgba(47, 42, 36, 0.2);
+
+  --ink: #2f2a24;
+  --ink-soft: rgba(47, 42, 36, 0.68);
+  --ink-faint: rgba(47, 42, 36, 0.45);
+
+  /* Token names inherited from Director's old neon skin; `--neon` is simply
+     "the accent". Teal here — the SEO half of the family. */
+  --neon: #2f9e8f;
+  --neon-dim: #1f7a6e;
+
+  --ok: #2f7d51;
+  --warn: #d98b2b;
+  --bad: #d1544f;
+
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-pill: 999px;
+
+  --font: 'Supercell Magic', 'Inter', ui-sans-serif, system-ui, -apple-system,
+    'Segoe UI', Roboto, sans-serif;
+
+  /* Neumorphism: `--lift` for raised controls, `--sink` for pressed. */
+  --lift:
+    -3px -3px 8px rgba(255, 255, 255, 0.95),
+    4px 5px 12px rgba(47, 42, 36, 0.16);
+  --lift-sm:
+    -2px -2px 5px rgba(255, 255, 255, 0.9),
+    2px 3px 7px rgba(47, 42, 36, 0.14);
+  --sink:
+    inset -2px -2px 6px rgba(255, 255, 255, 0.9),
+    inset 3px 4px 9px rgba(47, 42, 36, 0.18);
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+/*
+ * `hidden` must win.
+ *
+ * Several rules below set `display: block` on bare element selectors — inputs,
+ * buttons — and a `display` declaration beats the hidden attribute's UA style.
+ * The symptom was the raw file input and a Stop button both rendering on a
+ * panel that had explicitly hidden them. One rule, rather than remembering to
+ * pair every `hidden` with a class.
+ */
+[hidden] { display: none !important; }
+
+html, body { margin: 0; padding: 0; height: 100%; }
+
+body {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 11px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ------------------------------------------------------------------ *
+ * Top bar
+ * ------------------------------------------------------------------ */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 14px;
+  background: linear-gradient(180deg, rgba(255, 253, 250, 0.97) 0%, rgba(251, 247, 241, 0.97) 100%);
+  backdrop-filter: blur(14px) saturate(140%);
+  border-bottom: 1px solid rgba(47, 158, 143, 0.18);
+}
+
+.mark {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  flex: none;
+  background: radial-gradient(
+    120% 120% at 30% 20%,
+    rgba(190, 240, 230, 0.9) 0%,
+    rgba(70, 180, 164, 0.75) 30%,
+    rgba(150, 215, 205, 0.55) 100%
+  );
+  border: 1px solid rgba(47, 42, 36, 0.16);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 0 10px rgba(47, 158, 143, 0.4);
+}
+
+.brand {
+  margin: 0;
+  flex: 1;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.count {
+  font-size: 9px;
+  color: var(--ink-faint);
+}
+
+/* ------------------------------------------------------------------ *
+ * Segmented view switch — recessed track, raised active tab
+ * ------------------------------------------------------------------ */
+
+.seg.views {
+  display: flex;
+  gap: 3px;
+  margin: 10px 12px 12px;
+  padding: 3px;
+  background: var(--bg);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  box-shadow:
+    inset 0 2px 4px rgba(47, 42, 36, 0.14),
+    0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.seg.views button {
+  flex: 1;
+  padding: 7px 10px;
+  font: inherit;
+  font-size: 10px;
+  color: var(--ink-soft);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+}
+
+.seg.views button.on {
+  color: var(--ink);
+  background: linear-gradient(180deg, #fffdfa, var(--bg-elev));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 2px 5px rgba(47, 42, 36, 0.2);
+}
+
+.view {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0 12px 16px;
+}
+
+/* ------------------------------------------------------------------ *
+ * The plate — Director's charcoal headline, narrowed
+ * ------------------------------------------------------------------ */
+
+/*
+ * Slate rather than a colour, for the same reason it is slate in Director: the
+ * list below carries all the colour this panel needs, and a saturated plate
+ * would compete with the thing it introduces. Charcoal anchors the top and
+ * hands the colour downward.
+ *
+ * The moulding: light-to-dark face with a hard step at the midpoint, a lit top
+ * edge, a solid offset for the side wall, then the floor shadow.
+ */
+.plate {
+  position: relative;
+  margin: 0 0 16px;
+  padding: 13px 11px 15px;
+  text-align: center;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #4a443d 0%, #383229 49%, #2c2721 51%, #221e1a 100%);
+  overflow: hidden;
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.4),
+    0 0 0 3px #17140f,
+    0 6px 0 #17140f,
+    0 12px 18px rgba(47, 42, 36, 0.34);
+}
+
+/* The gloss. Sits under the text, which is z-index 1. */
+.plate::before {
+  content: '';
+  position: absolute;
+  inset: 3px 3px auto;
+  height: 44%;
+  border-radius: 13px 13px 40% 40% / 13px 13px 12px 12px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.02));
+  pointer-events: none;
+}
+
+.plate h2,
+.plate p {
+  position: relative;
+  z-index: 1;
+  color: #fdfaf5;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.plate h2 {
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* Steps back from the headline without losing contrast — 9.2:1 on the
+   darkest stop. */
+.plate p {
+  margin: 0;
+  font-size: 9.5px;
+  line-height: 1.45;
+  color: rgba(253, 250, 245, 0.72);
+}
+
+.steps {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 9px;
+  position: relative;
+  z-index: 1;
+}
+
+.stepchip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  font-size: 8.5px;
+  color: rgba(253, 250, 245, 0.86);
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-pill);
+}
+
+.stepchip b { color: var(--neon); font-weight: 400; }
+
+/* ------------------------------------------------------------------ *
+ * Directory cards
+ * ------------------------------------------------------------------ */
+
+.dirs { list-style: none; margin: 0; padding: 0; }
+
+.dir {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 8px;
+  align-items: center;
+  padding: 10px 11px;
+  margin-bottom: 8px;
+  background: linear-gradient(180deg, var(--bg-elev), var(--bg-elev-2));
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--lift-sm);
+}
+
+/*
+ * Sites with no adapter yet are shown but clearly parked. Hiding them would
+ * make the catalogue look like three directories; a row of dead buttons would
+ * make it look broken. Dimmed and unpressable reads as "coming", which is what
+ * it is.
+ */
+.dir.soon {
+  opacity: 0.5;
+  box-shadow: none;
+  background: transparent;
+}
+
+.dir-name { font-size: 11px; }
+.dir-tag {
+  grid-column: 1;
+  font-size: 8.5px;
+  color: var(--ink-faint);
+}
+.dir-state {
+  grid-column: 1 / -1;
+  font-size: 9px;
+  color: var(--ink-soft);
+}
+.dir-state.ok { color: var(--ok); }
+.dir-state.warn { color: var(--warn); }
+.dir-state.bad { color: var(--bad); }
+
+/* ------------------------------------------------------------------ *
+ * Buttons — moulded, matching Director
+ * ------------------------------------------------------------------ */
+
+button.cta {
+  grid-row: 1 / 3;
+  grid-column: 2;
+  padding: 6px 13px;
+  font: inherit;
+  font-size: 9.5px;
+  color: var(--ink);
+  background: linear-gradient(180deg, #fffdfa, var(--bg-elev-2));
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--lift-sm);
+  cursor: pointer;
+}
+button.cta:hover { background: linear-gradient(180deg, #fff, #fffdfa); }
+button.cta:active { box-shadow: var(--sink); }
+button.cta:disabled { opacity: 0.45; box-shadow: none; cursor: default; }
+
+button.save {
+  width: 100%;
+  padding: 10px;
+  font: inherit;
+  font-size: 11px;
+  color: #fffdf8;
+  background: linear-gradient(180deg, var(--neon), var(--neon-dim));
+  border: 1px solid rgba(47, 42, 36, 0.22);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--lift);
+  cursor: pointer;
+}
+button.save:active { box-shadow: var(--sink); }
+
+/* ------------------------------------------------------------------ *
+ * Profile form
+ * ------------------------------------------------------------------ */
+
+label {
+  display: block;
+  margin-bottom: 9px;
+  font-size: 9.5px;
+  color: var(--ink-soft);
+}
+
+.hint { color: var(--ink-faint); }
+
+input, textarea, select {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 7px 9px;
+  font-family: var(--font);
+  font-size: 10.5px;
+  color: var(--ink);
+  background: var(--bg-elev);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  /* Fields are recessed; buttons are raised. That is the whole grammar. */
+  box-shadow: inset 0 2px 4px rgba(47, 42, 36, 0.08);
+}
+input:focus, textarea:focus, select:focus {
+  outline: 2px solid var(--neon);
+  outline-offset: 1px;
+}
+textarea { resize: vertical; }
+
+.warn-box {
+  padding: 9px 10px;
+  margin-bottom: 12px;
+  font-size: 9.5px;
+  color: #6b4a10;
+  background: #fdf0d8;
+  border: 1px solid rgba(217, 139, 43, 0.35);
+  border-radius: var(--radius-sm);
+}
+
+.problems {
+  margin: 0 0 10px;
+  padding-left: 16px;
+  font-size: 9.5px;
+  color: var(--bad);
+}
+
+.saved { font-size: 9.5px; color: var(--ok); text-align: center; margin: 8px 0 0; }
+
+/* ------------------------------------------------------------------ *
+ * Keyword research surface
+ * ------------------------------------------------------------------ */
+
+.label { margin: 16px 0 7px; font-size: 9px; letter-spacing: .8px; text-transform: uppercase; color: var(--ink-faint); }
+
+.choose {
+  width: 100%;
+  padding: 10px;
+  font: inherit;
+  font-size: 10.5px;
+  color: var(--ink);
+  background: var(--bg-elev-2);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.choose:hover { border-style: solid; }
+
+.linkish {
+  align-self: flex-start;
+  margin-top: 7px;
+  padding: 0;
+  font: inherit;
+  font-size: 9.5px;
+  color: var(--neon-dim);
+  background: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.stop { display: block; margin: 8px auto 0; color: var(--bad); }
+
+.filerow { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.filename { font-size: 10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.summary { font-size: 10px; color: var(--ink-soft); }
+
+.go {
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px;
+  font: inherit;
+  font-size: 11px;
+  color: #f2fffb;
+  background: linear-gradient(180deg, var(--neon), var(--neon-dim));
+  border: 1px solid rgba(16, 70, 62, 0.4);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--lift);
+  cursor: pointer;
+}
+.go:active { box-shadow: var(--sink); }
+.go:disabled { opacity: .45; box-shadow: none; cursor: default; }
+.go.small { width: auto; margin: 0; padding: 5px 12px; font-size: 9.5px; box-shadow: var(--lift-sm); }
+
+/* Progress — a sunk track with a raised fill, same grammar as the tabs. */
+.bar {
+  height: 6px;
+  margin: 12px 0 5px;
+  background: var(--bg);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(47, 42, 36, .14);
+}
+.bar span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(180deg, var(--neon), var(--neon-dim));
+  transition: width .3s ease;
+}
+
+.resrow { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin: 14px 0 8px; }
+
+.kw { list-style: none; margin: 0; padding: 0; max-height: 260px; overflow-y: auto; }
+.kw li {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 5px 9px;
+  margin-bottom: 4px;
+  font-size: 10px;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.kw-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.kw-tag { flex: none; font-size: 8.5px; color: var(--neon-dim); text-transform: uppercase; }
+
+/* Source cards — the Sources tab is documentation, so it reads as prose. */
+.srcs { list-style: none; margin: 0; padding: 0; }
+.src {
+  padding: 10px 11px;
+  margin-bottom: 8px;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--lift-sm);
+}
+.src-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.src-name { font-size: 10.5px; }
+.src-tag { flex: none; font-size: 8.5px; color: var(--neon-dim); }
+.src-body { margin: 5px 0 0; font-size: 9.5px; line-height: 1.5; color: var(--ink-soft); }
