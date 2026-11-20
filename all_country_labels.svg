@@ -1,0 +1,176 @@
+  <text class="map-country-name-label map-lbl-detail" data-code="c242" x="941" y="351" font-size="6.8px">Fiji</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="tz" x="595" y="316" font-size="8px">Tanzania</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c732" x="468" y="220" font-size="6.8px">W. Sahara</text>
+  <text class="map-country-name-label map-lbl-major" data-code="ca" x="235" y="105" font-size="9.5px">Canada</text>
+  <text class="map-country-name-label map-lbl-major" data-code="us" x="230" y="175" font-size="9.5px">United States</text>
+  <text class="map-country-name-label map-lbl-major" data-code="kz" x="662" y="145" font-size="9.5px">Kazakhstan</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="uz" x="658" y="164" font-size="8px">Uzbekistan</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c598" x="895" y="317" font-size="6.8px">Papua New Guinea</text>
+  <text class="map-country-name-label map-lbl-major" data-code="id" x="805" y="315" font-size="9.5px">Indonesia</text>
+  <text class="map-country-name-label map-lbl-major" data-code="ar" x="330" y="430" font-size="9.5px">Argentina</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="cl" x="320" y="417" font-size="8px">Chile</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c180" x="564" y="305" font-size="6.8px">Dem. Rep. Congo</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c706" x="624" y="281" font-size="6.8px">Somalia</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="ke" x="603" y="295" font-size="8px">Kenya</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c729" x="580" y="246" font-size="6.8px">Sudan</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c148" x="550" y="248" font-size="6.8px">Chad</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c332" x="305" y="237" font-size="6.8px">Haiti</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c214" x="311" y="237" font-size="6.8px">Dominican Rep.</text>
+  <text class="map-country-name-label map-lbl-major" data-code="ru" x="690" y="110" font-size="9.5px">Russia</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c044" x="294" y="216" font-size="6.8px">Bahamas</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c238" x="359" y="459" font-size="6.8px">Falkland Is.</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="no" x="505" y="95" font-size="8px">Norway</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c304" x="418" y="71" font-size="6.8px">Greenland</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c260" x="667" y="452" font-size="6.8px">Fr. S. Antarctic Lands</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c626" x="842" y="324" font-size="6.8px">Timor-Leste</text>
+  <text class="map-country-name-label map-lbl-major" data-code="za" x="560" y="410" font-size="9.5px">South Africa</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c426" x="574" y="390" font-size="6.8px">Lesotho</text>
+  <text class="map-country-name-label map-lbl-major" data-code="mx" x="215" y="240" font-size="9.5px">Mexico</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="uy" x="355" y="400" font-size="6.8px">Uruguay</text>
+  <text class="map-country-name-label map-lbl-major" data-code="br" x="360" y="340" font-size="9.5px">Brazil</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="bo" x="326" y="349" font-size="8px">Bolivia</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="pe" x="295" y="335" font-size="8px">Peru</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="co" x="285" y="285" font-size="8px">Colombia</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c591" x="282" y="269" font-size="6.8px">Panama</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c188" x="271" y="265" font-size="6.8px">Costa Rica</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c558" x="270" y="256" font-size="6.8px">Nicaragua</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c340" x="266" y="250" font-size="6.8px">Honduras</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c222" x="260" y="253" font-size="6.8px">El Salvador</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c320" x="256" y="247" font-size="6.8px">Guatemala</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c084" x="261" y="242" font-size="6.8px">Belize</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="ve" x="320" y="274" font-size="8px">Venezuela</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c328" x="339" y="281" font-size="6.8px">Guyana</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c740" x="348" y="283" font-size="6.8px">Suriname</text>
+  <text class="map-country-name-label map-lbl-major" data-code="fr" x="495" y="175" font-size="9.5px">France</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="ec" x="286" y="301" font-size="6.8px">Ecuador</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c630" x="322" y="239" font-size="6.8px">Puerto Rico</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c388" x="292" y="239" font-size="6.8px">Jamaica</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c192" x="289" y="228" font-size="6.8px">Cuba</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="zw" x="580" y="356" font-size="6.8px">Zimbabwe</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="bw" x="563" y="366" font-size="6.8px">Botswana</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="na" x="546" y="366" font-size="6.8px">Namibia</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="sn" x="461" y="251" font-size="6.8px">Senegal</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c466" x="490" y="242" font-size="6.8px">Mali</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c478" x="472" y="233" font-size="6.8px">Mauritania</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c204" x="506" y="266" font-size="6.8px">Benin</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c562" x="525" y="242" font-size="6.8px">Niger</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="ng" x="522" y="266" font-size="8px">Nigeria</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="cm" x="534" y="279" font-size="6.8px">Cameroon</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c768" x="503" y="270" font-size="6.8px">Togo</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="gh" x="497" y="271" font-size="6.8px">Ghana</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="ci" x="485" y="273" font-size="6.8px">Ivory Coast</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c324" x="470" y="263" font-size="6.8px">Guinea</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c624" x="459" y="258" font-size="6.8px">Guinea-Bissau</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c430" x="474" y="276" font-size="6.8px">Liberia</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c694" x="468" y="269" font-size="6.8px">Sierra Leone</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c854" x="495" y="258" font-size="6.8px">Burkina Faso</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c140" x="555" y="276" font-size="6.8px">Central African Rep.</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c178" x="541" y="299" font-size="6.8px">Congo</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c266" x="532" y="298" font-size="6.8px">Gabon</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c226" x="528" y="291" font-size="6.8px">Eq. Guinea</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="zm" x="575" y="339" font-size="6.8px">Zambia</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c454" x="592" y="338" font-size="6.8px">Malawi</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="mz" x="595" y="351" font-size="8px">Mozambique</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c748" x="583" y="380" font-size="6.8px">eSwatini</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="ao" x="547" y="335" font-size="8px">Angola</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c108" x="582" y="307" font-size="6.8px">Burundi</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="il" x="591" y="197" font-size="6.8px">Israel</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c422" x="592" y="189" font-size="6.8px">Lebanon</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="mg" x="625" y="358" font-size="6.8px">Madagascar</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c275" x="592" y="195" font-size="6.8px">Palestine</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c270" x="458" y="254" font-size="6.8px">Gambia</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="tn" x="525" y="188" font-size="6.8px">Tunisia</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="dz" x="507" y="207" font-size="8px">Algeria</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c400" x="596" y="197" font-size="6.8px">Jordan</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="ae" x="644" y="221" font-size="8px">UAE</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c634" x="635" y="216" font-size="6.8px">Qatar</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c414" x="625" y="204" font-size="6.8px">Kuwait</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="iq" x="613" y="192" font-size="8px">Iraq</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c512" x="650" y="231" font-size="6.8px">Oman</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c548" x="951" y="345" font-size="6.8px">Vanuatu</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="kh" x="784" y="256" font-size="6.8px">Cambodia</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="th" x="772" y="249" font-size="8px">Thailand</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="la" x="778" y="238" font-size="6.8px">Laos</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="mm" x="758" y="230" font-size="8px">Myanmar</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="vn" x="786" y="244" font-size="8px">Vietnam</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c408" x="820" y="169" font-size="6.8px">North Korea</text>
+  <text class="map-country-name-label map-lbl-major" data-code="kr" x="826" y="181" font-size="9.5px">S. Korea</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="mn" x="751" y="149" font-size="8px">Mongolia</text>
+  <text class="map-country-name-label map-lbl-major" data-code="in" x="695" y="245" font-size="9.5px">India</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="bd" x="740" y="221" font-size="8px">Bangladesh</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c064" x="738" y="210" font-size="6.8px">Bhutan</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="np" x="720" y="207" font-size="6.8px">Nepal</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="pk" x="681" y="202" font-size="8px">Pakistan</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="af" x="670" y="189" font-size="6.8px">Afghanistan</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c762" x="680" y="174" font-size="6.8px">Tajikistan</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c417" x="686" y="165" font-size="6.8px">Kyrgyzstan</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c795" x="650" y="173" font-size="6.8px">Turkmenistan</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="ir" x="641" y="194" font-size="8px">Iran</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c760" x="599" y="186" font-size="6.8px">Syria</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c051" x="613" y="169" font-size="6.8px">Armenia</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="se" x="530" y="105" font-size="8px">Sweden</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="by" x="565" y="128" font-size="6.8px">Belarus</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="ua" x="575" y="141" font-size="8px">Ukraine</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="pl" x="545" y="145" font-size="8px">Poland</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="at" x="534" y="146" font-size="8px">Austria</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="hu" x="547" y="147" font-size="6.8px">Hungary</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c498" x="569" y="147" font-size="6.8px">Moldova</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="ro" x="561" y="151" font-size="8px">Romania</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c440" x="555" y="123" font-size="6.8px">Lithuania</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c428" x="557" y="118" font-size="6.8px">Latvia</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c233" x="558" y="113" font-size="6.8px">Estonia</text>
+  <text class="map-country-name-label map-lbl-major" data-code="de" x="520" y="155" font-size="9.5px">Germany</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="bg" x="563" y="161" font-size="6.8px">Bulgaria</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="gr" x="557" y="173" font-size="8px">Greece</text>
+  <text class="map-country-name-label map-lbl-major" data-code="tr" x="585" y="190" font-size="9.5px">Turkey</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c008" x="550" y="166" font-size="6.8px">Albania</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c191" x="541" y="154" font-size="6.8px">Croatia</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="ch" x="520" y="149" font-size="8px">Switzerland</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c442" x="514" y="139" font-size="6.8px">Luxembourg</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="be" x="511" y="137" font-size="8px">Belgium</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="nl" x="512" y="140" font-size="8px">Netherlands</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="pt" x="465" y="195" font-size="8px">Portugal</text>
+  <text class="map-country-name-label map-lbl-major" data-code="es" x="475" y="200" font-size="9.5px">Spain</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="ie" x="481" y="129" font-size="8px">Ireland</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c540" x="942" y="364" font-size="6.8px">New Caledonia</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c090" x="935" y="324" font-size="6.8px">Solomon Is.</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="nz" x="940" y="440" font-size="8px">New Zealand</text>
+  <text class="map-country-name-label map-lbl-major" data-code="au" x="845" y="395" font-size="9.5px">Australia</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="lk" x="719" y="272" font-size="6.8px">Sri Lanka</text>
+  <text class="map-country-name-label map-lbl-major" data-code="cn" x="765" y="205" font-size="9.5px">China</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c158" x="821" y="221" font-size="6.8px">Taiwan</text>
+  <text class="map-country-name-label map-lbl-major" data-code="it" x="530" y="195" font-size="9.5px">Italy</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="dk" x="523" y="120" font-size="8px">Denmark</text>
+  <text class="map-country-name-label map-lbl-major" data-code="gb" x="485" y="135" font-size="9.5px">United Kingdom</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c352" x="460" y="95" font-size="6.8px">Iceland</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c031" x="620" y="169" font-size="6.8px">Azerbaijan</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c268" x="608" y="163" font-size="6.8px">Georgia</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="ph" x="833" y="259" font-size="8px">Philippines</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="my" x="799" y="285" font-size="8px">Malaysia</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c096" x="813" y="282" font-size="6.8px">Brunei</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c705" x="536" y="151" font-size="6.8px">Slovenia</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="fi" x="556" y="97" font-size="8px">Finland</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c703" x="547" y="143" font-size="6.8px">Slovakia</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="cz" x="537" y="139" font-size="8px">Czechia</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c232" x="604" y="248" font-size="6.8px">Eritrea</text>
+  <text class="map-country-name-label map-lbl-major" data-code="jp" x="875" y="190" font-size="9.5px">Japan</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="py" x="345" y="370" font-size="6.8px">Paraguay</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c887" x="628" y="246" font-size="6.8px">Yemen</text>
+  <text class="map-country-name-label map-lbl-major" data-code="sa" x="605" y="240" font-size="9.5px">Saudi Arabia</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="cundefined" x="586" y="185" font-size="6.8px">N. Cyprus</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c196" x="585" y="186" font-size="6.8px">Cyprus</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="ma" x="478" y="202" font-size="8px">Morocco</text>
+  <text class="map-country-name-label map-lbl-major" data-code="eg" x="575" y="230" font-size="9.5px">Egypt</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="ly" x="547" y="211" font-size="8px">Libya</text>
+  <text class="map-country-name-label map-lbl-medium" data-code="et" x="607" y="269" font-size="8px">Ethiopia</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c262" x="615" y="259" font-size="6.8px">Djibouti</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="cundefined" x="626" y="266" font-size="6.8px">Somaliland</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c800" x="588" y="292" font-size="6.8px">Uganda</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c646" x="582" y="303" font-size="6.8px">Rwanda</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c070" x="544" y="157" font-size="6.8px">Bosnia and Herz.</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c807" x="554" y="165" font-size="6.8px">Macedonia</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c688" x="551" y="156" font-size="6.8px">Serbia</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c499" x="548" y="161" font-size="6.8px">Montenegro</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="cundefined" x="552" y="162" font-size="6.8px">Kosovo</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c780" x="334" y="263" font-size="6.8px">Trinidad and Tobago</text>
+  <text class="map-country-name-label map-lbl-detail" data-code="c728" x="582" y="273" font-size="6.8px">S. Sudan</text>

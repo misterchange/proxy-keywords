@@ -3,10 +3,10 @@ import { defineManifest } from '@crxjs/vite-plugin'
 /**
  * MV3 manifest.
  *
- * No `<all_urls>` and no content script. The one source this build ships —
- * Google Autocomplete — is a plain GET the service worker makes itself, so the
- * extension never touches a page the user is looking at and never reads their
- * browsing. `host_permissions` is a single endpoint.
+ * No `<all_urls>` and no declared content script. Google Autocomplete is a
+ * plain GET from the worker. Ahrefs needs its page: `scripting` plus the one
+ * host lets the worker inject a script into the Ahrefs tab it opened itself,
+ * and nowhere else. The extension never reads the user's other browsing.
  *
  * That is worth protecting as sources are added. A keyword tool asking to read
  * every site is indistinguishable, to a Chrome Web Store reviewer, from
@@ -16,10 +16,10 @@ export default defineManifest({
   manifest_version: 3,
   name: 'Proxy Keywords',
   version: '0.1.0',
-  description: 'Upload a sheet of seed keywords, get the long tail for a country.',
+  description: 'Type a keyword, pick a country, get keyword ideas with volume and KD as an Excel file.',
 
-  permissions: ['storage', 'sidePanel'],
-  host_permissions: ['https://suggestqueries.google.com/*'],
+  permissions: ['storage', 'sidePanel', 'scripting'],
+  host_permissions: ['https://suggestqueries.google.com/*', 'https://ahrefs.com/*'],
 
   background: { service_worker: 'src/background/index.ts', type: 'module' },
   side_panel: { default_path: 'src/sidepanel/index.html' },

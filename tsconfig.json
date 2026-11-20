@@ -9,7 +9,8 @@
     "noEmit": true,
     "skipLibCheck": true,
     "verbatimModuleSyntax": true,
-    "types": ["chrome"]
+    "allowImportingTsExtensions": true,
+    "types": ["chrome", "node"]
   },
   "include": ["src"]
 }

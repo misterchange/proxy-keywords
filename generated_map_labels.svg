@@ -1,0 +1,39 @@
+  <text class="map-country-name-label" data-code="ca" x="235" y="105" font-size="10px">Canada</text>
+  <text class="map-country-name-label" data-code="us" x="230" y="175" font-size="10px">United States</text>
+  <text class="map-country-name-label" data-code="kz" x="662" y="145" font-size="8.5px">Kazakhstan</text>
+  <text class="map-country-name-label" data-code="id" x="805" y="315" font-size="8.5px">Indonesia</text>
+  <text class="map-country-name-label" data-code="ar" x="330" y="430" font-size="8.5px">Argentina</text>
+  <text class="map-country-name-label" data-code="ke" x="603" y="295" font-size="8.5px">Kenya</text>
+  <text class="map-country-name-label" data-code="ru" x="690" y="110" font-size="10px">Russia</text>
+  <text class="map-country-name-label" data-code="no" x="505" y="95" font-size="8.5px">Norway</text>
+  <text class="map-country-name-label" data-code="za" x="560" y="410" font-size="8.5px">South Africa</text>
+  <text class="map-country-name-label" data-code="mx" x="215" y="240" font-size="8.5px">Mexico</text>
+  <text class="map-country-name-label" data-code="br" x="360" y="340" font-size="10px">Brazil</text>
+  <text class="map-country-name-label" data-code="co" x="285" y="285" font-size="8.5px">Colombia</text>
+  <text class="map-country-name-label" data-code="fr" x="495" y="175" font-size="8.5px">France</text>
+  <text class="map-country-name-label" data-code="ng" x="522" y="266" font-size="8.5px">Nigeria</text>
+  <text class="map-country-name-label" data-code="dz" x="507" y="207" font-size="8.5px">Algeria</text>
+  <text class="map-country-name-label" data-code="ae" x="644" y="221" font-size="8.5px">UAE</text>
+  <text class="map-country-name-label" data-code="th" x="772" y="249" font-size="8.5px">Thailand</text>
+  <text class="map-country-name-label" data-code="vn" x="786" y="244" font-size="8.5px">Vietnam</text>
+  <text class="map-country-name-label" data-code="kr" x="826" y="181" font-size="8.5px">S. Korea</text>
+  <text class="map-country-name-label" data-code="in" x="695" y="245" font-size="10px">India</text>
+  <text class="map-country-name-label" data-code="pk" x="681" y="202" font-size="8.5px">Pakistan</text>
+  <text class="map-country-name-label" data-code="se" x="530" y="105" font-size="8.5px">Sweden</text>
+  <text class="map-country-name-label" data-code="ua" x="575" y="141" font-size="8.5px">Ukraine</text>
+  <text class="map-country-name-label" data-code="pl" x="550" y="145" font-size="8.5px">Poland</text>
+  <text class="map-country-name-label" data-code="de" x="520" y="155" font-size="8.5px">Germany</text>
+  <text class="map-country-name-label" data-code="tr" x="585" y="190" font-size="8.5px">Turkey</text>
+  <text class="map-country-name-label" data-code="es" x="475" y="200" font-size="8.5px">Spain</text>
+  <text class="map-country-name-label" data-code="nz" x="940" y="440" font-size="8.5px">NZ</text>
+  <text class="map-country-name-label" data-code="au" x="845" y="395" font-size="10px">Australia</text>
+  <text class="map-country-name-label" data-code="cn" x="765" y="205" font-size="10px">China</text>
+  <text class="map-country-name-label" data-code="it" x="530" y="195" font-size="8.5px">Italy</text>
+  <text class="map-country-name-label" data-code="gb" x="485" y="135" font-size="8.5px">UK</text>
+  <text class="map-country-name-label" data-code="ph" x="833" y="259" font-size="8.5px">Philippines</text>
+  <text class="map-country-name-label" data-code="my" x="799" y="285" font-size="8.5px">Malaysia</text>
+  <text class="map-country-name-label" data-code="jp" x="875" y="190" font-size="8.5px">Japan</text>
+  <text class="map-country-name-label" data-code="sa" x="605" y="240" font-size="8.5px">Saudi Arabia</text>
+  <text class="map-country-name-label" data-code="ma" x="478" y="202" font-size="8.5px">Morocco</text>
+  <text class="map-country-name-label" data-code="eg" x="575" y="230" font-size="8.5px">Egypt</text>
+  <text class="map-country-name-label" data-code="et" x="607" y="269" font-size="8.5px">Ethiopia</text>

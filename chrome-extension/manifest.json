@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Cloak Ahrefs Generator Extension",
+  "version": "1.0.0",
+  "description": "Chrome extension that fetches Ahrefs keyword ideas using a stealth script (mirroring CloakBrowser logic).",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "tabs",
+    "scripting",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://ahrefs.com/*"
+  ]
+}
