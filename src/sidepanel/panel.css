@@ -33,19 +33,18 @@
 }
 
 :root {
-  --bg: #e9dfd0;
-  --bg-elev: #fffdfa;
-  --bg-elev-2: #fbf7f1;
+  --bg: #ffffff;
+  --bg-elev: #ffffff;
+  --bg-elev-2: #fafafa;
 
-  --line: rgba(47, 42, 36, 0.1);
-  --line-strong: rgba(47, 42, 36, 0.2);
+  --line: rgba(0, 0, 0, 0.05);
+  --line-strong: rgba(0, 0, 0, 0.1);
 
   --ink: #2f2a24;
   --ink-soft: rgba(47, 42, 36, 0.68);
   --ink-faint: rgba(47, 42, 36, 0.45);
 
-  /* Token names inherited from Director's old neon skin; `--neon` is simply
-     "the accent". Teal here — the SEO half of the family. */
+  /* Accent (teal) */
   --neon: #2f9e8f;
   --neon-dim: #1f7a6e;
 

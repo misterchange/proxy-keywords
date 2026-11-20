@@ -1,0 +1,608 @@
+[
+  {
+    "id": "r-alphaandbetausers",
+    "name": "/r/AlphaandBetausers",
+    "url": "https://www.reddit.com/r/alphaandbetausers/",
+    "type": "reddit"
+  },
+  {
+    "id": "r-buildinpublic",
+    "name": "/r/buildinpublic",
+    "url": "https://www.reddit.com/r/buildinpublic/",
+    "type": "reddit"
+  },
+  {
+    "id": "r-coupons",
+    "name": "/r/Coupons",
+    "url": "https://www.reddit.com/r/coupons/",
+    "type": "reddit"
+  },
+  {
+    "id": "r-design-critiques",
+    "name": "/r/Design_Critiques",
+    "url": "https://www.reddit.com/r/design_critiques/",
+    "type": "reddit"
+  },
+  {
+    "id": "r-entrepreneur",
+    "name": "/r/Entrepreneur",
+    "url": "https://reddit.com/r/entrepreneur",
+    "type": "reddit"
+  },
+  {
+    "id": "r-entrepreneurridealong",
+    "name": "/r/EntrepreneurRideAlong",
+    "url": "https://www.reddit.com/r/EntrepreneurRideAlong/",
+    "type": "reddit"
+  },
+  {
+    "id": "r-imadethis",
+    "name": "/r/IMadeThis",
+    "url": "https://reddit.com/r/imadethis",
+    "type": "reddit"
+  },
+  {
+    "id": "r-indiebiz",
+    "name": "/r/IndieBiz",
+    "url": "https://www.reddit.com/r/indiebiz/",
+    "type": "reddit"
+  },
+  {
+    "id": "r-indiehackers",
+    "name": "/r/indiehackers",
+    "url": "https://www.reddit.com/r/indiehackers/",
+    "type": "reddit"
+  },
+  {
+    "id": "r-ladybusiness",
+    "name": "/r/LadyBusiness",
+    "url": "https://www.reddit.com/r/ladybusiness/",
+    "type": "reddit"
+  },
+  {
+    "id": "r-microsaas",
+    "name": "/r/microsaas",
+    "url": "https://www.reddit.com/r/microsaas/",
+    "type": "reddit"
+  },
+  {
+    "id": "r-plugyourproduct",
+    "name": "/r/plugyourproduct",
+    "url": "https://www.reddit.com/r/plugyourproduct/",
+    "type": "reddit"
+  },
+  {
+    "id": "r-roastmystartup",
+    "name": "/r/RoastMyStartup",
+    "url": "https://www.reddit.com/r/roastmystartup",
+    "type": "reddit"
+  },
+  {
+    "id": "r-saas",
+    "name": "/r/SaaS",
+    "url": "https://www.reddit.com/r/SaaS/",
+    "type": "reddit"
+  },
+  {
+    "id": "r-shamelessplug",
+    "name": "/r/shamelessplug",
+    "url": "https://www.reddit.com/r/shamelessplug/",
+    "type": "reddit"
+  },
+  {
+    "id": "r-sideproject",
+    "name": "/r/SideProject",
+    "url": "https://reddit.com/r/sideproject",
+    "type": "reddit"
+  },
+  {
+    "id": "r-smallbusiness",
+    "name": "/r/SmallBusiness",
+    "url": "https://www.reddit.com/r/smallbusiness/",
+    "type": "reddit"
+  },
+  {
+    "id": "r-startups",
+    "name": "/r/Startups",
+    "url": "https://reddit.com/r/startups",
+    "type": "reddit"
+  },
+  {
+    "id": "r-thesidehustle",
+    "name": "/r/thesidehustle",
+    "url": "https://www.reddit.com/r/thesidehustle/",
+    "type": "reddit"
+  },
+  {
+    "id": "10words",
+    "name": "10words",
+    "url": "https://10words.io",
+    "type": "account-required"
+  },
+  {
+    "id": "ai-collection",
+    "name": "AI Collection",
+    "url": "https://www.thataicollection.com/",
+    "type": "account-required"
+  },
+  {
+    "id": "all-my-faves",
+    "name": "All My Faves",
+    "url": "https://www.allmyfaves.com/",
+    "type": "account-required"
+  },
+  {
+    "id": "all-startups",
+    "name": "All Startups",
+    "url": "https://www.allstartups.info/Startups/Submit",
+    "type": "direct-form"
+  },
+  {
+    "id": "all-top-startups",
+    "name": "All Top Startups",
+    "url": "https://alltopstartups.com/submit-startup/",
+    "type": "direct-form"
+  },
+  {
+    "id": "alternative-to",
+    "name": "Alternative To",
+    "url": "https://alternativeto.net/",
+    "type": "account-required"
+  },
+  {
+    "id": "alternative-me",
+    "name": "Alternative.me",
+    "url": "https://alternative.me/",
+    "type": "account-required"
+  },
+  {
+    "id": "angellist",
+    "name": "AngelList",
+    "url": "https://angel.co/",
+    "type": "account-required"
+  },
+  {
+    "id": "app-rater",
+    "name": "App Rater",
+    "url": "https://apprater.net/add/",
+    "type": "direct-form"
+  },
+  {
+    "id": "appoid",
+    "name": "Appoid",
+    "url": "https://appiod.com/submit-app-for-review/",
+    "type": "direct-form"
+  },
+  {
+    "id": "apppicker",
+    "name": "appPicker",
+    "url": "https://www.apppicker.com/",
+    "type": "account-required"
+  },
+  {
+    "id": "apps-listo",
+    "name": "Apps Listo",
+    "url": "https://appslisto.com/submit-your-app/",
+    "type": "direct-form"
+  },
+  {
+    "id": "apps-mamma",
+    "name": "Apps Mamma",
+    "url": "https://appsmamma.com/submit-your-app/",
+    "type": "direct-form"
+  },
+  {
+    "id": "appsthunder",
+    "name": "AppsThunder",
+    "url": "https://appsthunder.com/submit-your-app/",
+    "type": "direct-form"
+  },
+  {
+    "id": "appvita",
+    "name": "Appvita",
+    "url": "https://www.appvita.com/",
+    "type": "account-required"
+  },
+  {
+    "id": "arctic-startup",
+    "name": "Arctic Startup",
+    "url": "https://arcticstartup.com/",
+    "type": "account-required"
+  },
+  {
+    "id": "awesome-indie",
+    "name": "Awesome Indie",
+    "url": "https://awesomeindie.com",
+    "type": "account-required"
+  },
+  {
+    "id": "beta-bound",
+    "name": "Beta Bound",
+    "url": "https://www.betabound.com/announce/",
+    "type": "direct-form"
+  },
+  {
+    "id": "beta-testing",
+    "name": "Beta Testing",
+    "url": "https://betatesting.com/beta-testing",
+    "type": "account-required"
+  },
+  {
+    "id": "builtinchicago",
+    "name": "BuiltInChicago",
+    "url": "https://www.builtinchicago.org/send-us-tip",
+    "type": "account-required"
+  },
+  {
+    "id": "capterra",
+    "name": "Capterra",
+    "url": "https://www.capterra.com/vendors/sign-up",
+    "type": "account-required"
+  },
+  {
+    "id": "collaborizm",
+    "name": "Collaborizm",
+    "url": "https://www.collaborizm.com",
+    "type": "account-required"
+  },
+  {
+    "id": "crozdesk",
+    "name": "CrozDesk",
+    "url": "https://vendor.crozdesk.com/user/signup",
+    "type": "direct-form"
+  },
+  {
+    "id": "crunch-base",
+    "name": "Crunch Base",
+    "url": "https://www.crunchbase.com/#/home/index",
+    "type": "account-required"
+  },
+  {
+    "id": "discover-cloud",
+    "name": "Discover Cloud",
+    "url": "https://www.discovercloud.com/become-a-vendor",
+    "type": "account-required"
+  },
+  {
+    "id": "ebool",
+    "name": "eBool",
+    "url": "https://www.ebool.com/submit",
+    "type": "direct-form"
+  },
+  {
+    "id": "f6s",
+    "name": "F6S",
+    "url": "https://www.f6s.com/",
+    "type": "account-required"
+  },
+  {
+    "id": "g2-crowd",
+    "name": "G2 Crowd",
+    "url": "https://www.g2crowd.com/products/new",
+    "type": "direct-form"
+  },
+  {
+    "id": "geek-wire",
+    "name": "Geek Wire",
+    "url": "https://geekwire.com/startup-list/",
+    "type": "account-required"
+  },
+  {
+    "id": "get-app",
+    "name": "Get App",
+    "url": "https://getapp.com/",
+    "type": "account-required"
+  },
+  {
+    "id": "getworm",
+    "name": "Getworm",
+    "url": "https://getworm.com/submit-startup",
+    "type": "direct-form"
+  },
+  {
+    "id": "gust",
+    "name": "Gust",
+    "url": "https://www.gust.com",
+    "type": "account-required"
+  },
+  {
+    "id": "inc-42",
+    "name": "Inc 42",
+    "url": "https://inc42.com/startup-submission/",
+    "type": "account-required"
+  },
+  {
+    "id": "indie-hackers",
+    "name": "Indie Hackers",
+    "url": "https://www.indiehackers.com/",
+    "type": "account-required"
+  },
+  {
+    "id": "killer-startups",
+    "name": "Killer Startups",
+    "url": "https://killerstartups.com/submit-startup/",
+    "type": "direct-form"
+  },
+  {
+    "id": "land-book",
+    "name": "Land-book",
+    "url": "https://land-book.com/guidelines",
+    "type": "account-required"
+  },
+  {
+    "id": "launched",
+    "name": "Launched",
+    "url": "https://launched.io/SubmitStartup",
+    "type": "direct-form"
+  },
+  {
+    "id": "launchigniter",
+    "name": "LaunchIgniter",
+    "url": "https://launchigniter.com/submit",
+    "type": "direct-form"
+  },
+  {
+    "id": "launching-next",
+    "name": "Launching Next",
+    "url": "https://www.launchingnext.com/submit/",
+    "type": "direct-form"
+  },
+  {
+    "id": "loop",
+    "name": "Loop",
+    "url": "https://app.loopinput.com/",
+    "type": "account-required"
+  },
+  {
+    "id": "makeuseof",
+    "name": "MakeUseOf",
+    "url": "https://www.makeuseof.com/about/",
+    "type": "account-required"
+  },
+  {
+    "id": "micro-saas-examples",
+    "name": "Micro SaaS Examples",
+    "url": "https://www.microsaasexamples.com/",
+    "type": "account-required"
+  },
+  {
+    "id": "netted",
+    "name": "Netted",
+    "url": "https://www.netted.net/contact-us/",
+    "type": "account-required"
+  },
+  {
+    "id": "next-big-what",
+    "name": "Next Big What",
+    "url": "https://nextbigwhat.com/",
+    "type": "account-required"
+  },
+  {
+    "id": "pitchwall",
+    "name": "PitchWall",
+    "url": "https://pitchwall.co/product/submit",
+    "type": "direct-form"
+  },
+  {
+    "id": "postmake",
+    "name": "Postmake",
+    "url": "https://postmake.io/submit",
+    "type": "direct-form"
+  },
+  {
+    "id": "preapps",
+    "name": "PreApps",
+    "url": "https://www.preapps.com/",
+    "type": "account-required"
+  },
+  {
+    "id": "product-hunt",
+    "name": "Product Hunt",
+    "url": "https://www.producthunt.com/",
+    "type": "account-required"
+  },
+  {
+    "id": "saashub",
+    "name": "SaaSHub",
+    "url": "https://www.saashub.com/",
+    "type": "account-required"
+  },
+  {
+    "id": "saasrow",
+    "name": "SaasRow",
+    "url": "https://saasrow.com/",
+    "type": "account-required"
+  },
+  {
+    "id": "saijo-s-tools-list",
+    "name": "Saijo's Tools List",
+    "url": "https://saijogeorge.com/best-marketing-tools/",
+    "type": "account-required"
+  },
+  {
+    "id": "show-hn",
+    "name": "Show HN",
+    "url": "https://news.ycombinator.com/showhn.html",
+    "type": "direct-form"
+  },
+  {
+    "id": "side-projectors",
+    "name": "Side Projectors",
+    "url": "https://www.sideprojectors.com",
+    "type": "account-required"
+  },
+  {
+    "id": "simple-lister",
+    "name": "Simple Lister",
+    "url": "https://simplelister.com/",
+    "type": "account-required"
+  },
+  {
+    "id": "similarsitesearch",
+    "name": "SimilarSiteSearch",
+    "url": "https://www.similarsitesearch.com/tips.html",
+    "type": "account-required"
+  },
+  {
+    "id": "slant",
+    "name": "Slant",
+    "url": "https://www.slant.co/",
+    "type": "account-required"
+  },
+  {
+    "id": "snapmunk",
+    "name": "SnapMunk",
+    "url": "https://www.snapmunk.com/submit-your-startup/",
+    "type": "direct-form"
+  },
+  {
+    "id": "software-advice",
+    "name": "Software Advice",
+    "url": "https://softwareadvice-markets.questionpro.com/",
+    "type": "account-required"
+  },
+  {
+    "id": "stack-share",
+    "name": "Stack Share",
+    "url": "https://stackshare.io/",
+    "type": "account-required"
+  },
+  {
+    "id": "starter-story",
+    "name": "Starter Story",
+    "url": "https://starterstory.com/",
+    "type": "account-required"
+  },
+  {
+    "id": "startup-88",
+    "name": "Startup 88",
+    "url": "https://startup88.com/",
+    "type": "account-required"
+  },
+  {
+    "id": "startup-base",
+    "name": "Startup Base",
+    "url": "https://startupbase.io/submit",
+    "type": "direct-form"
+  },
+  {
+    "id": "startup-beat",
+    "name": "Startup Beat",
+    "url": "https://startupbeat.com/startup-beat-featured-startup-pitch-guidelines/",
+    "type": "account-required"
+  },
+  {
+    "id": "startup-benchmarks",
+    "name": "Startup Benchmarks",
+    "url": "https://www.startupbenchmarks.com/",
+    "type": "account-required"
+  },
+  {
+    "id": "startup-buffer",
+    "name": "Startup Buffer",
+    "url": "https://startupbuffer.com",
+    "type": "account-required"
+  },
+  {
+    "id": "startup-inspire",
+    "name": "Startup Inspire",
+    "url": "https://www.startupinspire.com/submit",
+    "type": "direct-form"
+  },
+  {
+    "id": "startup-ranking",
+    "name": "Startup Ranking",
+    "url": "https://www.startupranking.com/",
+    "type": "account-required"
+  },
+  {
+    "id": "startup-stash",
+    "name": "Startup Stash",
+    "url": "https://startupstash.com/",
+    "type": "account-required"
+  },
+  {
+    "id": "startup-tabs",
+    "name": "Startup Tabs",
+    "url": "https://startuptabs.com/",
+    "type": "account-required"
+  },
+  {
+    "id": "startup-tracker",
+    "name": "Startup Tracker",
+    "url": "https://startuptracker.io/",
+    "type": "account-required"
+  },
+  {
+    "id": "startupblink",
+    "name": "StartupBlink",
+    "url": "https://www.startupblink.com/",
+    "type": "account-required"
+  },
+  {
+    "id": "startups-gallery",
+    "name": "Startups Gallery",
+    "url": "https://startups.gallery/",
+    "type": "account-required"
+  },
+  {
+    "id": "state-of-tech",
+    "name": "State of Tech",
+    "url": "https://stateoftech.net/advertise?submit-an-app-for-review",
+    "type": "direct-form"
+  },
+  {
+    "id": "tabscape",
+    "name": "Tabscape",
+    "url": "https://www.tapscape.com/",
+    "type": "account-required"
+  },
+  {
+    "id": "tech-map",
+    "name": "Tech Map",
+    "url": "https://thetechmap.com/",
+    "type": "account-required"
+  },
+  {
+    "id": "tech-pluto",
+    "name": "Tech Pluto",
+    "url": "https://www.techpluto.com/submit-a-startup/",
+    "type": "direct-form"
+  },
+  {
+    "id": "tiny-launch",
+    "name": "Tiny Launch",
+    "url": "https://www.tinylaunch.com",
+    "type": "account-required"
+  },
+  {
+    "id": "the-changelog",
+    "name": "The Changelog",
+    "url": "https://github.com/thechangelog/ping",
+    "type": "account-required"
+  },
+  {
+    "id": "vator",
+    "name": "Vator",
+    "url": "https://www.vator.tv/",
+    "type": "account-required"
+  },
+  {
+    "id": "web-app-rater",
+    "name": "Web App Rater",
+    "url": "https://webapprater.com/submit-your-web-application-for-review-html",
+    "type": "direct-form"
+  },
+  {
+    "id": "website-hunt",
+    "name": "Website Hunt",
+    "url": "https://www.websitehunt.co",
+    "type": "account-required"
+  },
+  {
+    "id": "ycombinator",
+    "name": "Ycombinator",
+    "url": "https://news.ycombinator.com/",
+    "type": "direct-form"
+  }
+]

@@ -10,27 +10,30 @@ per data source.
 
 ## What it does today
 
-- **Reads almost any sheet.** Columns are inferred from the cells, not the
-  header names — a matrix with one column per country, a keyword column plus
-  a country column, or a bare list all work. Locales (`en-IN`), country names,
-  aliases (`USA`, `Türkiye`) and combined headers (`Egypt / Saudi Arabia`)
-  all resolve. A title and instructions above the header are fine.
-- **Google Autocomplete** as the first source: the long tail and the
-  questions, genuinely scoped by country. No account, no key, no quota.
-- **CSV export** carrying `tool`, `group` and `batch` from the input sheet,
-  plus `source` and `read_at` on every row.
+- **Type a keyword, pick a country, get Excel.** The side panel takes one
+  keyword (or several, one per line), a country, and a source, and the
+  result downloads as an `.xlsx` (CSV still available).
+- **Ahrefs Keyword Generator** (default source): opens
+  `ahrefs.com/keyword-generator/?country=<cc>&input=<keyword>` in a tab you
+  can see, presses "Find keywords", and reads the results table: keyword,
+  volume, KD, and which list (ideas / questions) each came from.
+  **Ahrefs puts up a Cloudflare "Verify you are human" box. You tick it.**
+  The extension never touches it, and nothing here tries to get past it. The
+  panel tells you when it is waiting on you. Ahrefs' terms restrict automated
+  access, so using this source is your call.
+- **Google Autocomplete**: the long tail and the questions, scoped by
+  country. No account, no key, no quota, no volume.
+- **Reads almost any sheet** for bulk runs. Columns are inferred from the
+  cells, not the header names.
 
-## What it does not do
+## Known gaps
 
-- **No search volume.** Autocomplete does not carry it, and no row from that
-  source ever sets a `volume` field. A fabricated number is worse than a blank
-  one. See `ROADMAP` in `src/lib/registry.ts` for the sources that would add it
-  — Google Keyword Planner (free, the user's own Ads account) is the obvious
-  next one.
-- **No scraping of competitors' free tools.** `src/lib/registry.ts` carries a
-  `REJECTED` list with the reasoning. Short version: their terms forbid it,
-  free tiers are capped lead magnets, and a product whose supply is someone
-  else's loss-leader has no supply.
+- The Ahrefs results-table reader was written without seeing the table (the
+  human check was in the way), so it matches any table whose header has a
+  "Keyword" column. If Ahrefs changes its markup, the run reports `drift`
+  instead of returning an empty file. Fix it in
+  `src/adapters/ahrefsGenerator.ts` (`driveAhrefs`).
+- Autocomplete rows have no volume. See `ROADMAP` in `src/lib/registry.ts`.
 
 ## Build
 
@@ -52,7 +55,7 @@ src/lib/keywords.ts    Country list, KeywordRow, the Source interface
 src/lib/sheet.ts       Sheet parsing and CSV export
 src/lib/infer.ts       Works out which column is which, from the cells
 src/lib/registry.ts    Available sources, rejected sources, roadmap
-src/adapters/          One file per source
+src/adapters/          One file per source (ahrefsGenerator drives a tab)
 src/background/        Service worker: runs lookups, owns the run
 src/sidepanel/         The only UI
 ```

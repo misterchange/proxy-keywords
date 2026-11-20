@@ -34,7 +34,7 @@ export const COUNTRIES: Country[] = [
   { code: 'br', name: 'Brazil', hl: 'pt', aliases: ['brasil'] },
   { code: 'mx', name: 'Mexico', hl: 'es', aliases: ['méxico'] },
   { code: 'ph', name: 'Philippines', hl: 'en' },
-  { code: 'vn', name: 'Vietnam', hl: 'vi', aliases: ['viet nam'] },
+  { code: 'vn', name: 'Vietnam', hl: 'vi', aliases: ['viet nam', 'vi'] },
   { code: 'tr', name: 'Turkey', hl: 'tr', aliases: ['türkiye', 'turkiye'] },
   { code: 'bd', name: 'Bangladesh', hl: 'en' },
   { code: 'pk', name: 'Pakistan', hl: 'en' },
@@ -55,6 +55,10 @@ export const COUNTRIES: Country[] = [
   { code: 'jp', name: 'Japan', hl: 'ja' },
   { code: 'ng', name: 'Nigeria', hl: 'en' },
   { code: 'ru', name: 'Russia', hl: 'ru' },
+  { code: 'kr', name: 'South Korea', hl: 'ko', aliases: ['korea'] },
+  { code: 'pl', name: 'Poland', hl: 'pl', aliases: ['polska'] },
+  { code: 'th', name: 'Thailand', hl: 'th' },
+  { code: 'tw', name: 'Taiwan', hl: 'zh-TW' },
 ]
 
 export function countryFor(code: string): Country | undefined {
@@ -133,7 +137,7 @@ export function resolveCountry(raw: string): Country | undefined {
  */
 export function countriesFromHeader(raw: string): Country[] {
   const withoutHint = stripHints(raw)
-  const parts = withoutHint.split(/[/,]|\bor\b/i)
+  const parts = withoutHint.split(/[/,+&]|\bor\b|\band\b/i)
   const found = parts.map((p) => resolveCountry(p)).filter((c): c is Country => !!c)
   // Deduplicate while keeping order.
   return found.filter((c, i) => found.findIndex((x) => x.code === c.code) === i)
@@ -171,6 +175,13 @@ export interface KeywordRow {
   currency?: string
   /** 'low' | 'medium' | 'high', as planners report it. */
   competition?: string
+  /** Which list on the source page this came from — "Questions", "Keyword ideas", … */
+  list?: string
+  /** Volume and KD exactly as the source showed them ("3.6K", "0-10"), beside the parsed numbers. */
+  volumeText?: string
+  difficultyText?: string
+  /** The source's own "last updated" for this keyword, as shown. */
+  updated?: string
   /** Which adapter produced this row — shown in the export, never guessed. */
   source: string
   /** When it was read. Keyword data goes stale; an undated number is a trap. */
@@ -215,9 +226,13 @@ export interface Source {
    *   'own-account'     — the user's own logged-in account on a service that
    *                       allows them to read their own data
    *   'licensed-api'    — a paid API whose terms cover this use
+   *   'user-tab'        — a site's own page, driven in a tab the user can see,
+   *                       one seed at a time, with the user clearing any human
+   *                       check by hand. The site's terms may restrict this;
+   *                       the user decides whether to use it.
    *   'prohibited'      — terms forbid automated access. Must not ship.
    */
-  legal: 'public-endpoint' | 'own-account' | 'licensed-api' | 'prohibited'
+  legal: 'public-endpoint' | 'own-account' | 'licensed-api' | 'user-tab' | 'prohibited'
   /** Does a run need a tab, or can the worker fetch it directly? */
   needsTab: boolean
   /** Expand one seed. Country is always explicit; there is no "global". */

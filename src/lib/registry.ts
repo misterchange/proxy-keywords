@@ -6,16 +6,20 @@
  * selecting it in the UI, by a stale id in storage, or by a future caller who
  * did not read this file.
  *
- * The prohibited entries are kept rather than deleted on purpose. "Why don't
- * we just scrape Ahrefs?" is a question that gets asked once a month; the
- * answer should live next to the code rather than in someone's memory of a
- * conversation.
+ * The prohibited entries are kept rather than deleted on purpose, so the
+ * reasoning lives next to the code rather than in someone's memory.
+ *
+ * Ahrefs used to be listed there. It is now a source (`ahrefsGenerator`) in a
+ * narrower form: its own page, in a tab the user can see, one seed at a time,
+ * with the user ticking the Cloudflare check by hand. Nothing in this repo
+ * gets past that check for them, and nothing should.
  */
 
 import type { Source } from './keywords'
+import { ahrefsGenerator } from '../adapters/ahrefsGenerator'
 import { googleSuggest } from '../adapters/googleSuggest'
 
-export const SOURCES: Source[] = [googleSuggest]
+export const SOURCES: Source[] = [ahrefsGenerator, googleSuggest]
 
 /**
  * Considered and rejected, with the reason.
@@ -24,19 +28,9 @@ export const SOURCES: Source[] = [googleSuggest]
  */
 export const REJECTED: Array<{ name: string; url: string; why: string }> = [
   {
-    name: 'Ahrefs free keyword generator',
-    url: 'https://ahrefs.com/keyword-generator/',
-    why:
-      "Terms forbid automated access, the free tier is a capped lead magnet, and it is fronted by a human check. " +
-      'Getting past that check is the only way in, and defeating a bot check is not something this project does — ' +
-      'not as a policy nicety, but because the ban lands on the user whose browser made the request, and because a ' +
-      'product whose supply is a competitor’s loss-leader has no supply at all. Repeated challenges are the ' +
-      'symptom of rate limiting, and evasion makes rate limiting worse, not better.',
-  },
-  {
     name: 'Semrush / Moz / Ubersuggest free tiers',
     url: '',
-    why: 'Same shape as Ahrefs: capped free tools behind sign-in, terms against automation. Their paid APIs are fine — see below.',
+    why: 'Capped free tools behind sign-in, with terms against automation. Their paid APIs are fine — see below.',
   },
 ]
 
@@ -75,4 +69,4 @@ export function sourceFor(id: string): Source | undefined {
   return s.legal === 'prohibited' ? undefined : s
 }
 
-export const DEFAULT_SOURCE_ID = googleSuggest.id
+export const DEFAULT_SOURCE_ID = ahrefsGenerator.id

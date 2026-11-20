@@ -1,0 +1,866 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Proxyflo.com | Autonomous SERP Keyword Intelligence Agent</title>
+    <meta name="description" content="Proxyflo.com autonomous AI keyword research agent with real-time residential SERP discovery, competitor ranking gaps, and multi-country search intelligence." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@1,6..72,400..700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./app.css?v=split_chat_map_v7_sidebar_colors" />
+    <style>
+      /* Homepage Specific Sharp Architecture Layout */
+      body.home-page {
+        background-color: #FAF8F5;
+        color: #111111;
+        font-family: var(--font-body);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .home-navbar {
+        width: 100%;
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 1.25rem 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1.5px solid #111111;
+        background: #FFFFFF;
+      }
+
+      .home-nav-links {
+        display: flex;
+        align-items: center;
+        gap: 1.75rem;
+      }
+
+      .home-nav-link {
+        font-family: var(--font-mono);
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: #111111;
+        text-decoration: none;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        transition: color 0.15s ease;
+      }
+
+      .home-nav-link:hover {
+        color: #F27A59;
+      }
+
+      .btn-launch-agent {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.65rem 1.25rem;
+        background: #F27A59;
+        color: #FFFFFF;
+        font-family: var(--font-display);
+        font-size: 0.82rem;
+        font-weight: 800;
+        text-decoration: none;
+        border: 1.5px solid #111111;
+        box-shadow: 2.5px 2.5px 0px #111111;
+        transition: all 0.15s ease;
+      }
+
+      .btn-launch-agent:hover {
+        transform: translate(-1.5px, -1.5px);
+        box-shadow: 4px 4px 0px #111111;
+        background: #EA580C;
+        color: #FFFFFF;
+      }
+
+      /* Hero Section */
+      .home-hero-section {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 4rem 2rem 2.5rem;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .home-meta-tag {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        background: #FEF9E7;
+        color: #B45309;
+        border: 1.5px solid #FDC841;
+        padding: 0.35rem 0.85rem;
+        margin-bottom: 1.25rem;
+      }
+
+      .home-hero-title {
+        font-family: var(--font-display);
+        font-size: 3.4rem;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        line-height: 1.08;
+        color: #111111;
+        margin-bottom: 1.25rem;
+        max-width: 880px;
+      }
+
+      .home-hero-title .serif-italic {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-weight: 400;
+        color: #F27A59;
+      }
+
+      .home-hero-subtitle {
+        font-size: 1.12rem;
+        color: #4B5563;
+        line-height: 1.55;
+        max-width: 680px;
+        margin-bottom: 2rem;
+      }
+
+      .home-hero-actions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 3.5rem;
+      }
+
+      .btn-hero-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.85rem 1.75rem;
+        background: #111111;
+        color: #FFFFFF;
+        font-family: var(--font-display);
+        font-size: 0.92rem;
+        font-weight: 800;
+        text-decoration: none;
+        border: 1.5px solid #111111;
+        box-shadow: 3px 3px 0px #F27A59;
+        transition: all 0.15s ease;
+      }
+
+      .btn-hero-primary:hover {
+        transform: translate(-1.5px, -1.5px);
+        box-shadow: 5px 5px 0px #111111;
+        background: #000000;
+      }
+
+      .btn-hero-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.85rem 1.5rem;
+        background: #FFFFFF;
+        color: #111111;
+        font-family: var(--font-display);
+        font-size: 0.92rem;
+        font-weight: 800;
+        text-decoration: none;
+        border: 1.5px solid #111111;
+        box-shadow: 3px 3px 0px #111111;
+        transition: all 0.15s ease;
+      }
+
+      .btn-hero-secondary:hover {
+        transform: translate(-1.5px, -1.5px);
+        box-shadow: 5px 5px 0px #111111;
+        background: #F8FAFC;
+      }
+
+      /* Infographics Section */
+      .home-infographics-section {
+        width: 100%;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 1rem 2rem 4rem;
+      }
+
+      /* Features Grid */
+      .home-features-section {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 2rem 2rem 4rem;
+        width: 100%;
+      }
+
+      .features-header {
+        text-align: center;
+        margin-bottom: 2.5rem;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+      }
+
+      .feature-box {
+        background: #FFFFFF;
+        border: 1.5px solid #111111;
+        padding: 1.75rem;
+        box-shadow: 3px 3px 0px #111111;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .feature-num {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 800;
+        padding: 0.2rem 0.5rem;
+        border: 1px solid #111111;
+        align-self: flex-start;
+      }
+
+      .feature-title {
+        font-family: var(--font-display);
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: #111111;
+      }
+
+      .feature-desc {
+        font-size: 0.85rem;
+        color: #4B5563;
+        line-height: 1.5;
+      }
+
+      /* Home Footer */
+      .home-footer {
+        margin-top: auto;
+        border-top: 1.5px solid #111111;
+        background: #FFFFFF;
+        padding: 2rem;
+      }
+
+      .home-footer-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .home-footer-left {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .home-footer-copy {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: #64748B;
+      }
+
+      @media (max-width: 860px) {
+        .features-grid {
+          grid-template-columns: 1fr;
+        }
+        .home-hero-title {
+          font-size: 2.35rem;
+        }
+      }
+    </style>
+  </head>
+  <body class="home-page">
+    <!-- TOP NAVIGATION BAR -->
+    <header class="home-navbar">
+      <div class="brand-logo" style="display:flex;align-items:center;gap:0.75rem;">
+        <div class="logo-proxyflo-mark" title="Proxyflo.com — Surf The SERPs">
+          <svg width="34" height="34" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="pflo-ocean" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#0284C7"/>
+                <stop offset="1" stop-color="#0F172A"/>
+              </linearGradient>
+              <linearGradient id="pflo-board-grad" x1="8" y1="32" x2="28" y2="12" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FBBF24"/>
+                <stop offset="0.5" stop-color="#F97316"/>
+                <stop offset="1" stop-color="#EF4444"/>
+              </linearGradient>
+            </defs>
+            <rect width="40" height="40" fill="url(#pflo-ocean)"/>
+            <circle cx="28" cy="12" r="5" fill="#FEF08A" opacity="0.9"/>
+            <path d="M4 33C9 33 14 28 18 22C22 15 27 10 33 12C36.5 13.5 36 19 32 21C28 23 24 18.5 26 15" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round"/>
+            <path d="M5 34C11 34 16 27 20 21C24 16 29 13.5 33 15" stroke="#38BDF8" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M28 10C26.5 11.5 20 18 15 24C12.5 27 10.5 29.5 9 31C9.8 30.2 11 30.5 11.8 31.2C12.5 29.5 15.5 27 18 24C24 18 27.5 12.5 28.5 10.5C28.8 9.8 28.5 9.5 28 10Z" fill="url(#pflo-board-grad)" stroke="#FFFFFF" stroke-width="0.8"/>
+            <path d="M27.5 11L10.5 30.5" stroke="#FFFFFF" stroke-width="0.9" opacity="0.9"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <div class="brand-title-wrap" style="display:flex;align-items:center;gap:0.35rem;">
+            <span class="brand-title" style="font-family:var(--font-display);font-size:1.12rem;font-weight:800;color:#111111;">Proxyflo<span class="brand-tld">.com</span></span>
+            <span class="badge-rtrvr" style="background:#111111;color:#FFFFFF;font-family:var(--font-mono);font-size:0.6rem;font-weight:800;padding:2px 5px;">AGENT</span>
+          </div>
+          <span class="brand-subtitle" style="font-size:0.68rem;color:#64748B;">Autonomous SERP Intelligence</span>
+        </div>
+      </div>
+
+      <nav class="home-nav-links">
+        <a href="#workflows" class="home-nav-link">Workflows</a>
+        <a href="#features" class="home-nav-link">Proxy Mesh</a>
+        <a href="/keyword-research" class="home-nav-link">Keyword Studio</a>
+        <a href="/submitter" class="home-nav-link" style="color:#059669;font-weight:800;">🚀 Auto Submitter</a>
+      </nav>
+
+      <a href="/keyword-research" class="btn-launch-agent">
+        <span>Launch Keyword Agent</span>
+        <span>⚡</span>
+      </a>
+    </header>
+
+    <!-- HERO SECTION -->
+    <main>
+      <section class="home-hero-section">
+        <div class="home-meta-tag">• AUTONOMOUS SERP DISCOVERY PLATFORM •</div>
+        <h1 class="home-hero-title">
+          Surf the SERPs with <span class="serif-italic">autonomous</span> keyword intelligence.
+        </h1>
+        <p class="home-hero-subtitle">
+          Proxyflo deploys residential proxy crawlers to extract buyer search intent, uncover competitor ranking gaps, and cluster localized keyword matrices across Google worldwide.
+        </p>
+
+        <div class="home-hero-actions">
+          <a href="/keyword-research" class="btn-hero-primary">
+            <span>Launch Research Studio</span>
+            <span>⚡</span>
+          </a>
+          <a href="/submitter" class="btn-hero-secondary" style="border-color:#059669;color:#059669;font-weight:800;">
+            <span>Startup Backlink Submitter</span>
+            <span>🚀</span>
+          </a>
+          <a href="/keyword-research?tab=terminal" class="btn-hero-secondary">
+            <span>View Live SERP Telemetry</span>
+            <span>📡</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- COLORFUL KEYWORD RESEARCH INFOGRAPHICS SHOWCASE -->
+      <section class="home-infographics-section" id="workflows">
+        <div class="rtrvr-usecases-wrapper">
+          <div class="rtrvr-meta-tag">• KEYWORD RESEARCH WORKFLOWS</div>
+          <h2 class="rtrvr-main-headline">What will you run?</h2>
+
+          <!-- 5 Colorful RTRVR Keyword Research Tabs (Strict Sharp Corners) -->
+          <div class="rtrvr-tab-bar" id="rtrvr-tab-bar">
+            <button type="button" class="rtrvr-tab active" data-tab-id="leads" data-theme="#F27A59">
+              <span class="tab-num">01</span> Buyer Keywords
+            </button>
+            <button type="button" class="rtrvr-tab" data-tab-id="scrape" data-theme="#7AD1F5">
+              <span class="tab-num">02</span> Seed Matrix &amp; Proxies
+            </button>
+            <button type="button" class="rtrvr-tab" data-tab-id="fetch" data-theme="#FDC841">
+              <span class="tab-num">03</span> Hunt Competitors
+            </button>
+            <button type="button" class="rtrvr-tab" data-tab-id="forms" data-theme="#7BC89C">
+              <span class="tab-num">04</span> Question Queries
+            </button>
+            <button type="button" class="rtrvr-tab" data-tab-id="socials" data-theme="#EE89AC">
+              <span class="tab-num">05</span> Multi-Country SERPs
+            </button>
+          </div>
+
+          <!-- Dynamic Big Colorful Canvas -->
+          <div class="rtrvr-stage-canvas" id="rtrvr-stage-canvas" style="background-color: #F27A59;">
+            
+            <!-- PANEL 01: BUYER KEYWORDS (Coral #F27A59) -->
+            <div class="rtrvr-panel active" id="rtrvr-panel-leads">
+              <div class="rtrvr-panel-header">
+                <h2 class="rtrvr-hero-text">
+                  Turn any domain into high-intent <span class="serif-italic">buyer keywords.</span>
+                </h2>
+                <div class="rtrvr-chat-bubble">
+                  <span class="bubble-tag" style="background:#F27A59;">hey proxyflo</span>
+                  <p class="bubble-msg">crawl removesynth.com, extract buyer intent queries, and find untapped search questions across US &amp; India Google SERPs.</p>
+                </div>
+              </div>
+
+              <!-- 3-Step Flow Architecture -->
+              <div class="rtrvr-flow-row">
+                <!-- Step 1: Target Domain Seed Card -->
+                <div class="rtrvr-card event-card">
+                  <div class="event-header-gradient" style="background:linear-gradient(135deg, #F27A59 0%, #FF997A 100%);">
+                    <span class="event-badge">4 seed keywords active</span>
+                    <span class="event-title">removesynth.com</span>
+                  </div>
+                  <div class="event-info-body">
+                    <span class="event-name">AI Watermark &amp; Metadata Cleaner</span>
+                    <span class="event-time">Seeds: clean photo metadata • remove synthid • exif cleaner online</span>
+                    <div class="event-avatars">
+                      <span class="avatar-dot dot-1">US</span>
+                      <span class="avatar-dot dot-2">IN</span>
+                      <span class="avatar-dot dot-3">UK</span>
+                      <span class="avatar-dot dot-4">DE</span>
+                      <span class="avatar-caption">Target SERP proxy nodes active</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Connector 1 -->
+                <div class="rtrvr-connector">
+                  <span class="connector-label">+84 clusters</span>
+                  <span class="connector-arrow">┄┄┄┄┄&gt;</span>
+                </div>
+
+                <!-- Step 2: Enriched Keywords Card -->
+                <div class="rtrvr-card enriched-card">
+                  <div class="card-caption">buyer keywords enriched</div>
+                  <div class="enriched-list">
+                    <div class="enriched-item">
+                      <div class="enriched-avatar" style="background:#0284C7;">KW</div>
+                      <div class="enriched-info">
+                        <span class="enriched-name">how to remove synthid watermark</span>
+                        <span class="enriched-role">14.2K vol • KD 24 (Low)</span>
+                      </div>
+                      <div class="enriched-actions">
+                        <span class="action-chip" style="background:#EFF6FF;color:#1D4ED8;">$3.40</span>
+                        <span class="action-chip" style="background:#DCFCE7;color:#166534;">High</span>
+                      </div>
+                    </div>
+                    <div class="enriched-item">
+                      <div class="enriched-avatar" style="background:#D97706;">KW</div>
+                      <div class="enriched-info">
+                        <span class="enriched-name">best online metadata cleaner free</span>
+                        <span class="enriched-role">8.9K vol • KD 18 (Very Easy)</span>
+                      </div>
+                      <div class="enriched-actions">
+                        <span class="action-chip" style="background:#FEF3C7;color:#B45309;">$2.15</span>
+                        <span class="action-chip" style="background:#DCFCE7;color:#166534;">Buyer</span>
+                      </div>
+                    </div>
+                    <div class="enriched-item">
+                      <div class="enriched-avatar" style="background:#BE185D;">KW</div>
+                      <div class="enriched-info">
+                        <span class="enriched-name">photoshop remove watermark alternative</span>
+                        <span class="enriched-role">22.5K vol • KD 32 (Med)</span>
+                      </div>
+                      <div class="enriched-actions">
+                        <span class="action-chip" style="background:#FCE7F3;color:#BE185D;">$4.80</span>
+                        <span class="action-chip" style="background:#E0E7FF;color:#4338CA;">Intent</span>
+                      </div>
+                    </div>
+                    <div class="enriched-item">
+                      <div class="enriched-avatar" style="background:#059669;">KW</div>
+                      <div class="enriched-info">
+                        <span class="enriched-name">bulk exif remover chrome extension</span>
+                        <span class="enriched-role">6.1K vol • KD 12 (Easy)</span>
+                      </div>
+                      <div class="enriched-actions">
+                        <span class="action-chip" style="background:#ECFDF5;color:#047857;">$1.90</span>
+                        <span class="action-chip" style="background:#DCFCE7;color:#166534;">Tool</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Connector 2 -->
+                <div class="rtrvr-connector">
+                  <span class="connector-arrow">┄┄┄┄┄&gt;</span>
+                </div>
+
+                <!-- Step 3: SERP Rank Blueprint Card -->
+                <div class="rtrvr-card outreach-card">
+                  <div class="outreach-header">
+                    <span class="outreach-sender">📍 SERP Rank Blueprint: Top #1-#3</span>
+                    <span class="outreach-badge">Google US &amp; IN</span>
+                  </div>
+                  <div class="outreach-body">
+                    <span class="outreach-subject">Intent: Commercial Buyer Keywords</span>
+                    <p class="outreach-text">Cluster dispatched across residential proxy IP pool. Estimated organic search reach: +65,000 monthly visitors.</p>
+                  </div>
+                  <div class="chat-reply-bubble" style="background:#FFF7ED;border-color:#FED7AA;">
+                    <span class="bubble-sender" style="color:#C2410C;">Proxyflo SERP Dispatch</span>
+                    <span class="reply-text" style="color:#9A3412;">14 untapped low-competition questions ready to target in blog &amp; landing pages.</span>
+                  </div>
+                  <a href="/keyword-research" class="rtrvr-send-btn" style="text-decoration:none;">
+                    Mine buyer keywords ⚡
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- PANEL 02: SEED MATRIX & PROXIES (Sky Blue #7AD1F5) -->
+            <div class="rtrvr-panel" id="rtrvr-panel-scrape">
+              <div class="rtrvr-panel-header">
+                <h2 class="rtrvr-hero-text" style="color:#0F172A;">
+                  Say it. Cluster it. <span class="bold-text">Rank it.</span>
+                </h2>
+                <div class="rtrvr-chat-bubble">
+                  <span class="bubble-tag" style="background:#0284C7;">matrix crawler</span>
+                  <p class="bubble-msg">upload fabcastle_seeds.xlsx (2,400 keywords), rotate across US proxy nodes, and extract phrase match &amp; volume.</p>
+                </div>
+              </div>
+              <div class="rtrvr-flow-row">
+                <div class="rtrvr-card event-card">
+                  <div class="event-header-gradient" style="background:linear-gradient(135deg, #0284C7 0%, #38BDF8 100%);">
+                    <span class="event-badge">Seed Matrix File</span>
+                    <span class="event-title">fabcastle_seeds.xlsx</span>
+                  </div>
+                  <div class="event-info-body">
+                    <span class="event-name">60 Root Seeds • 2,400 Matrix Queries</span>
+                    <span class="event-time">Residential IP Pool: 4,000+ proxy nodes</span>
+                    <div class="event-avatars">
+                      <span class="avatar-dot" style="background:#0284C7;">P1</span>
+                      <span class="avatar-dot" style="background:#0369A1;">P2</span>
+                      <span class="avatar-dot" style="background:#075985;">P3</span>
+                      <span class="avatar-caption">Rotating residential nodes</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="rtrvr-connector">
+                  <span class="connector-label">2,400 queries</span>
+                  <span class="connector-arrow">┄┄┄┄┄&gt;</span>
+                </div>
+                <div class="rtrvr-card enriched-card">
+                  <div class="card-caption">matrix extraction sample</div>
+                  <div class="enriched-list">
+                    <div class="enriched-item">
+                      <div class="enriched-avatar" style="background:#0284C7;">01</div>
+                      <div class="enriched-info">
+                        <span class="enriched-name">buy residential proxies cheap</span>
+                        <span class="enriched-role">18,500 vol • KD 38 • $4.20 CPC</span>
+                      </div>
+                      <span class="action-chip" style="background:#DCFCE7;color:#166534;">High ROI</span>
+                    </div>
+                    <div class="enriched-item">
+                      <div class="enriched-avatar" style="background:#0284C7;">02</div>
+                      <div class="enriched-info">
+                        <span class="enriched-name">rotating proxy api for scraping</span>
+                        <span class="enriched-role">12,100 vol • KD 28 • $6.50 CPC</span>
+                      </div>
+                      <span class="action-chip" style="background:#EFF6FF;color:#1D4ED8;">Tech</span>
+                    </div>
+                    <div class="enriched-item">
+                      <div class="enriched-avatar" style="background:#0284C7;">03</div>
+                      <div class="enriched-info">
+                        <span class="enriched-name">best mobile proxies for sneaker bot</span>
+                        <span class="enriched-role">9,400 vol • KD 21 • $3.80 CPC</span>
+                      </div>
+                      <span class="action-chip" style="background:#FEF3C7;color:#B45309;">Buyer</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="rtrvr-connector">
+                  <span class="connector-arrow">┄┄┄┄┄&gt;</span>
+                </div>
+                <div class="rtrvr-card outreach-card">
+                  <div class="outreach-header">
+                    <span class="outreach-sender">💾 Export Destination</span>
+                    <span class="outreach-badge">1-Click</span>
+                  </div>
+                  <div class="outreach-body">
+                    <span class="outreach-subject">Formatted Excel (.xlsx) &amp; CSV</span>
+                    <p class="outreach-text">Includes Volume, KD score, CPC, Search Intent tags, and side-by-side questions cluster.</p>
+                  </div>
+                  <div class="chat-reply-bubble" style="background:#EFF6FF;border-color:#BFDBFE;">
+                    <span class="bubble-sender" style="color:#1D4ED8;">Auto-Formatting</span>
+                    <span class="reply-text" style="color:#1E40AF;">Generated fabcastle_seeds_keywords_2026.xlsx with 137 verified search matches.</span>
+                  </div>
+                  <a href="/keyword-research" class="rtrvr-send-btn" style="text-decoration:none;">
+                    Expand seed matrix ⚡
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- PANEL 03: HUNT COMPETITORS (Sunshine Yellow #FDC841) -->
+            <div class="rtrvr-panel" id="rtrvr-panel-fetch">
+              <div class="rtrvr-panel-header">
+                <h2 class="rtrvr-hero-text" style="color:#111111;">
+                  Fetch the competitor keywords <span class="bold-text">worth outranking.</span>
+                </h2>
+                <div class="rtrvr-chat-bubble">
+                  <span class="bubble-tag" style="background:#D97706;">competitor hunt</span>
+                  <p class="bubble-msg">scan photoshop.com &amp; photopea.com for metadata cleaning keywords and extract the easy ranking terms.</p>
+                </div>
+              </div>
+              <div class="rtrvr-flow-row">
+                <div class="rtrvr-card event-card">
+                  <div class="event-header-gradient" style="background:linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);color:#0F172A;">
+                    <span class="event-badge" style="background:rgba(0,0,0,0.15);">Target Competitors</span>
+                    <span class="event-title">photoshop.com • photopea.com</span>
+                  </div>
+                  <div class="event-info-body">
+                    <span class="event-name">Overlap: 1,840 Shared Search Queries</span>
+                    <span class="event-time">Untapped Traffic Opportunity: +$840K Value</span>
+                  </div>
+                </div>
+                <div class="rtrvr-connector">
+                  <span class="connector-label">Gap Analysis</span>
+                  <span class="connector-arrow">┄┄┄┄┄&gt;</span>
+                </div>
+                <div class="rtrvr-card enriched-card">
+                  <div class="card-caption">competitor ranking gap discovered</div>
+                  <div class="enriched-list">
+                    <div class="enriched-item">
+                      <div class="enriched-avatar" style="background:#D97706;">GAP</div>
+                      <div class="enriched-info">
+                        <span class="enriched-name">remove metadata from jpeg online free</span>
+                        <span class="enriched-role">Competitor Rank #18 • KD 14 (Very Easy)</span>
+                      </div>
+                      <span class="action-chip" style="background:#DCFCE7;color:#166534;">Win #1</span>
+                    </div>
+                    <div class="enriched-item">
+                      <div class="enriched-avatar" style="background:#D97706;">GAP</div>
+                      <div class="enriched-info">
+                        <span class="enriched-name">how to strip camera info from png</span>
+                        <span class="enriched-role">Competitor Rank #24 • KD 9 (Easy)</span>
+                      </div>
+                      <span class="action-chip" style="background:#DCFCE7;color:#166534;">Easy</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="rtrvr-connector">
+                  <span class="connector-arrow">┄┄┄┄┄&gt;</span>
+                </div>
+                <div class="rtrvr-card outreach-card">
+                  <div class="outreach-header">
+                    <span class="outreach-sender">⚔️ Outranking Blueprint</span>
+                    <span class="outreach-badge">High Impact</span>
+                  </div>
+                  <div class="outreach-body">
+                    <span class="outreach-subject">Generate Comparison Landing Pages</span>
+                    <p class="outreach-text">Target competitor brand + alternative keywords with free online tool schema.</p>
+                  </div>
+                  <a href="/keyword-research" class="rtrvr-send-btn" style="text-decoration:none;">
+                    Hunt competitor keywords ⚡
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- PANEL 04: QUESTION QUERIES (Mint Green #7BC89C) -->
+            <div class="rtrvr-panel" id="rtrvr-panel-forms">
+              <div class="rtrvr-panel-header">
+                <h2 class="rtrvr-hero-text" style="color:#064E3B;">
+                  Mine the high-converting <span class="serif-italic">question queue.</span>
+                </h2>
+                <div class="rtrvr-chat-bubble">
+                  <span class="bubble-tag" style="background:#059669;">google paa stream</span>
+                  <p class="bubble-msg">extract every question people ask Google about removing AI watermarks and classify by buyer intent.</p>
+                </div>
+              </div>
+              <div class="rtrvr-flow-row">
+                <div class="rtrvr-card event-card">
+                  <div class="event-header-gradient" style="background:linear-gradient(135deg, #10B981 0%, #34D399 100%);">
+                    <span class="event-badge">PAA Live Engine</span>
+                    <span class="event-title">Google People Also Ask</span>
+                  </div>
+                  <div class="event-info-body">
+                    <span class="event-name">Real-Time Question Branching</span>
+                    <span class="event-time">57 Live Questions Discovered</span>
+                  </div>
+                </div>
+                <div class="rtrvr-connector">
+                  <span class="connector-label">Recursive Mining</span>
+                  <span class="connector-arrow">┄┄┄┄┄&gt;</span>
+                </div>
+                <div class="rtrvr-card enriched-card">
+                  <div class="card-caption">top search questions</div>
+                  <div class="enriched-list">
+                    <div class="enriched-item">
+                      <div class="enriched-avatar" style="background:#059669;">?</div>
+                      <div class="enriched-info">
+                        <span class="enriched-name">can google detect synthid watermark after compression?</span>
+                        <span class="enriched-role">4,400 monthly searches • KD 12 (Easy)</span>
+                      </div>
+                      <span class="action-chip" style="background:#EFF6FF;color:#1D4ED8;">FAQ</span>
+                    </div>
+                    <div class="enriched-item">
+                      <div class="enriched-avatar" style="background:#059669;">?</div>
+                      <div class="enriched-info">
+                        <span class="enriched-name">what is the safest way to remove photo metadata?</span>
+                        <span class="enriched-role">7,200 monthly searches • KD 16 (Low)</span>
+                      </div>
+                      <span class="action-chip" style="background:#DCFCE7;color:#166534;">Commercial</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="rtrvr-connector">
+                  <span class="connector-arrow">┄┄┄┄┄&gt;</span>
+                </div>
+                <div class="rtrvr-card outreach-card">
+                  <div class="outreach-header">
+                    <span class="outreach-sender">📝 Content Production</span>
+                    <span class="outreach-badge">SEO Ops</span>
+                  </div>
+                  <div class="outreach-body">
+                    <span class="outreach-subject">Auto-Generated FAQ Schema</span>
+                    <p class="outreach-text">Directly export questions mapped to JSON-LD FAQPage structured data.</p>
+                  </div>
+                  <a href="/keyword-research" class="rtrvr-send-btn" style="text-decoration:none;">
+                    Mine question queries ⚡
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- PANEL 05: MULTI-COUNTRY SERPS (Candy Pink #EE89AC) -->
+            <div class="rtrvr-panel" id="rtrvr-panel-socials">
+              <div class="rtrvr-panel-header">
+                <h2 class="rtrvr-hero-text" style="color:#831843;">
+                  Target, dispatch, and <span class="bold-text">rank everywhere.</span>
+                </h2>
+                <div class="rtrvr-chat-bubble">
+                  <span class="bubble-tag" style="background:#DB2777;">global serp crawler</span>
+                  <p class="bubble-msg">dispatch localized search queries to Google US, Google Germany (de), Google India (co.in), and Google Japan (co.jp).</p>
+                </div>
+              </div>
+              <div class="rtrvr-flow-row">
+                <div class="rtrvr-card event-card">
+                  <div class="event-header-gradient" style="background:linear-gradient(135deg, #EC4899 0%, #F472B6 100%);">
+                    <span class="event-badge">Interactive World Map</span>
+                    <span class="event-title">40+ Geographic Search Markets</span>
+                  </div>
+                  <div class="event-info-body">
+                    <span class="event-name">Multi-Country SERP Targeting</span>
+                    <span class="event-time">Geo-targeted IP handoffs &amp; localized phrase matching</span>
+                  </div>
+                </div>
+                <div class="rtrvr-connector">
+                  <span class="connector-label">Local SERPs</span>
+                  <span class="connector-arrow">┄┄┄┄┄&gt;</span>
+                </div>
+                <div class="rtrvr-card enriched-card">
+                  <div class="card-caption">multi-country keyword breakdown</div>
+                  <div class="enriched-list">
+                    <div class="enriched-item">
+                      <div class="enriched-avatar" style="background:#BE185D;">🇺🇸</div>
+                      <div class="enriched-info">
+                        <span class="enriched-name">remove synthid watermark (United States)</span>
+                        <span class="enriched-role">14.2K vol • KD 24 • $3.40 CPC</span>
+                      </div>
+                      <span class="action-chip">US Google</span>
+                    </div>
+                    <div class="enriched-item">
+                      <div class="enriched-avatar" style="background:#BE185D;">🇩🇪</div>
+                      <div class="enriched-info">
+                        <span class="enriched-name">synthid wasserzeichen entfernen (Germany)</span>
+                        <span class="enriched-role">3.8K vol • KD 11 • €2.10 CPC</span>
+                      </div>
+                      <span class="action-chip">DE Google</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="rtrvr-connector">
+                  <span class="connector-arrow">┄┄┄┄┄&gt;</span>
+                </div>
+                <div class="rtrvr-card outreach-card">
+                  <div class="outreach-header">
+                    <span class="outreach-sender">🌍 Global SERP Dispatch</span>
+                    <span class="outreach-badge">Live Multi-Region</span>
+                  </div>
+                  <div class="outreach-body">
+                    <span class="outreach-subject">Residential Proxy Handshake</span>
+                    <p class="outreach-text">Captures country-specific search volumes, local CPCs, and regional phrase matches.</p>
+                  </div>
+                  <a href="/keyword-research" class="rtrvr-send-btn" style="text-decoration:none;">
+                    Dispatch global keywords ⚡
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- FEATURES GRID -->
+      <section class="home-features-section" id="features">
+        <div class="features-header">
+          <div class="home-meta-tag">• CORE ARCHITECTURE •</div>
+          <h2 style="font-family:var(--font-display);font-size:2rem;font-weight:800;letter-spacing:-0.03em;">Engineered for Uncapped SERP Intelligence</h2>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-box">
+            <span class="feature-num" style="background:#FFF1ED;border-color:#F27A59;color:#C2410C;">01 ARCHITECTURE</span>
+            <h3 class="feature-title">Anti-Detection Proxy Mesh</h3>
+            <p class="feature-desc">Autonomous IP rotation through verified residential nodes prevents Google rate-limiting, CAPTCHAs, and bans across high-volume batch crawls.</p>
+          </div>
+
+          <div class="feature-box">
+            <span class="feature-num" style="background:#EDF9FE;border-color:#7AD1F5;color:#0284C7;">02 DISCOVERY</span>
+            <h3 class="feature-title">Deep SERP Phrase Matching</h3>
+            <p class="feature-desc">Discovers buyer intent queries, Google Suggest keywords, recursive People Also Ask question chains, and competitor keyword gaps in parallel.</p>
+          </div>
+
+          <div class="feature-box">
+            <span class="feature-num" style="background:#FEF9E7;border-color:#FDC841;color:#D97706;">03 EXPORT</span>
+            <h3 class="feature-title">Production Excel &amp; CSV Bundles</h3>
+            <p class="feature-desc">Export formatted spreadsheets with calculated search volume, KD difficulty ratings, CPC estimates, and intent classification with a single click.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="home-footer">
+      <div class="home-footer-inner">
+        <div class="home-footer-left">
+          <span style="font-family:var(--font-display);font-weight:800;font-size:0.95rem;">Proxyflo.com</span>
+          <span class="home-footer-copy">© 2026 Autonomous SERP Keyword Agent. All rights reserved.</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <span style="font-family:var(--font-mono);font-size:0.72rem;background:#DCFCE7;border:1px solid #86EFAC;color:#166534;padding:0.25rem 0.65rem;font-weight:700;">● Engine Ready</span>
+          <a href="/keyword-research" style="font-family:var(--font-mono);font-size:0.72rem;background:#111111;color:#FFFFFF;text-decoration:none;padding:0.35rem 0.75rem;font-weight:700;">Open Keyword Studio →</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- INTERACTIVE TAB SWITCHER SCRIPT -->
+    <script>
+      (function() {
+        const tabs = document.querySelectorAll('.rtrvr-tab');
+        const canvas = document.getElementById('rtrvr-stage-canvas');
+        const panels = {
+          leads: document.getElementById('rtrvr-panel-leads'),
+          scrape: document.getElementById('rtrvr-panel-scrape'),
+          fetch: document.getElementById('rtrvr-panel-fetch'),
+          forms: document.getElementById('rtrvr-panel-forms'),
+          socials: document.getElementById('rtrvr-panel-socials')
+        };
+
+        tabs.forEach(tab => {
+          tab.addEventListener('click', function(e) {
+            e.preventDefault();
+            const tabId = this.getAttribute('data-tab-id');
+            const themeColor = this.getAttribute('data-theme') || '#F27A59';
+
+            tabs.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+
+            if (canvas) {
+              canvas.style.backgroundColor = themeColor;
+            }
+
+            Object.values(panels).forEach(p => {
+              if (p) p.classList.remove('active');
+            });
+
+            if (panels[tabId]) {
+              panels[tabId].classList.add('active');
+            }
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>

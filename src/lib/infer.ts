@@ -16,7 +16,7 @@
  * 12-row sheet and a 4,000-row sheet score the same way.
  */
 
-import { resolveCountry } from './keywords'
+import { resolveCountry } from './keywords.ts'
 
 export interface ColumnGuess {
   keyword: number

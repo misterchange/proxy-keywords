@@ -6,10 +6,10 @@
  * written to chrome.storage as it lands, and the panel reads from there. A
  * closed panel, a suspended worker and a reopened panel all see the same run.
  *
- * Google Autocomplete needs no tab, so the worker fetches it directly. Sources
- * that do need a tab (a planner behind a sign-in) will route through a content
- * script the way Proxy Poster does — `Source.needsTab` is the switch, and the
- * branch is marked below rather than pretended away.
+ * Google Autocomplete needs no tab, so the worker fetches it directly. Ahrefs
+ * does: its adapter opens a tab and injects a script, and that script reports
+ * back on `kw:tab-status` ("tick the box", "reading results…"). Those land in
+ * `run.live` so the panel can tell the person what is wanted of them.
  */
 
 import { countryFor, type KeywordRow } from '../lib/keywords'
@@ -30,9 +30,13 @@ export interface Run {
   rows: KeywordRow[]
   /** Per-seed notes — a handoff or a failure, so nothing disappears quietly. */
   notes: Array<{ seed: string; kind: string; detail: string }>
+  /** What the current seed is waiting on, in words. Cleared between seeds. */
+  live?: string
 }
 
 let abort: AbortController | null = null
+/** The run in progress — the one object the loop and status messages both write to. */
+let current: Run | null = null
 
 async function save(run: Run): Promise<void> {
   await chrome.storage.local.set({ [RUN_KEY]: run })
@@ -67,6 +71,7 @@ async function start(seeds: SeedRow[], sourceId: string, defaultCountry: string)
     rows: [],
     notes: [],
   }
+  current = run
   await save(run)
 
   for (const seed of seeds) {
@@ -80,11 +85,10 @@ async function start(seeds: SeedRow[], sourceId: string, defaultCountry: string)
       continue
     }
 
-    try {
-      // Tab-based sources are not wired yet; the only one shipped fetches
-      // directly. Saying so beats a silent wrong path when one is added.
-      if (source.needsTab) throw new Error(`${source.name} needs a tab, which this build does not drive yet`)
+    run.live = source.needsTab ? `Opening ${source.name} for "${seed.keyword}"…` : undefined
+    await save(run)
 
+    try {
       const out = await source.lookup(seed.keyword, country, signal)
       if (out.kind === 'ok') {
         // Carry the sheet's own columns onto every result, so the export
@@ -105,9 +109,11 @@ async function start(seeds: SeedRow[], sourceId: string, defaultCountry: string)
     }
 
     run.done++
+    run.live = undefined
     await save(run)
   }
 
+  run.live = undefined
   run.status = signal.aborted ? 'aborted' : 'done'
   await save(run)
 }
@@ -129,6 +135,14 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
         }
       })()
       return true
+    }
+
+    case 'kw:tab-status': {
+      if (current?.status === 'running') {
+        current.live = String(msg.text).slice(0, 200)
+        void save(current)
+      }
+      return false
     }
 
     case 'kw:abort': {

@@ -26,8 +26,8 @@
  */
 
 import * as XLSX from 'xlsx'
-import { countriesFromHeader, resolveCountry } from './keywords'
-import { inferColumns } from './infer'
+import { countriesFromHeader, resolveCountry } from './keywords.ts'
+import { inferColumns } from './infer.ts'
 
 export interface SeedRow {
   /** 1-based row in the sheet, for error messages. */
@@ -78,6 +78,13 @@ const splitSeeds = (cell: string) =>
     .split('|')
     .map((s) => s.replace(/\s+/g, ' ').trim())
     .filter(Boolean)
+    .map((s) => s.replace(/\s*\?+$/, '').trim())
+    .filter((s) => {
+      const lower = s.toLowerCase()
+      if (/^n\/?a\b/i.test(lower)) return false
+      if (/^\(.*\)$/.test(s) && /searches in|english terms|mostly/i.test(lower)) return false
+      return s.length > 0
+    })
 
 /**
  * Find the header row.
@@ -98,7 +105,7 @@ function findHeader(grid: string[][]): { index: number; cells: string[] } | null
   return null
 }
 
-function fromGrid(grid: string[][]): SheetParse {
+export function fromGrid(grid: string[][]): SheetParse {
   const problems: string[] = []
   const rows: SeedRow[] = []
   const nonEmpty = grid.filter((r) => r.some((c) => (c ?? '').trim() !== ''))
@@ -382,11 +389,176 @@ const esc = (v: unknown) => {
  * six months later.
  */
 export function toCsv(rows: import('./keywords').KeywordRow[]): string {
-  const head = ['tool', 'group', 'batch', 'country', 'seed', 'keyword', 'volume', 'difficulty', 'cpc', 'currency', 'competition', 'source', 'read_at']
+  const head = ['tool', 'group', 'batch', 'country', 'seed', 'keyword', 'list', 'volume', 'volume_text', 'difficulty', 'difficulty_text', 'updated', 'source', 'read_at']
   const body = rows.map((r) =>
-    [r.tool, r.group, r.batch, r.country, r.seed, r.keyword, r.volume, r.difficulty, r.cpc, r.currency, r.competition, r.source, new Date(r.at).toISOString()]
+    [r.tool, r.group, r.batch, r.country, r.seed, r.keyword, r.list, r.volume, r.volumeText, r.difficulty, r.difficultyText, r.updated, r.source, new Date(r.at).toISOString()]
       .map(esc)
       .join(','),
   )
   return [head.join(','), ...body].join('\n')
+}
+
+/**
+ * Results to an Excel workbook.
+ *
+ * Same principle as the CSV: `source` and `read_at` on every row. Columns that
+ * no row fills are dropped, so a single-keyword Ahrefs run is not padded with
+ * empty Tool / Group / Batch / CPC columns. Volume and KD come twice — the
+ * number for sorting, and the text exactly as the source showed it, because
+ * "0-10" or "<10" has no honest single number.
+ */
+export function toXlsx(rows: import('./keywords').KeywordRow[]): ArrayBuffer {
+  const cols: Array<[string, (r: import('./keywords').KeywordRow) => unknown]> = [
+    ['Keyword', (r) => r.keyword],
+    ['Volume', (r) => r.volume],
+    ['Volume (as shown)', (r) => r.volumeText],
+    ['KD', (r) => r.difficulty],
+    ['KD (as shown)', (r) => r.difficultyText],
+    ['CPC', (r) => r.cpc],
+    ['Currency', (r) => r.currency],
+    ['Competition', (r) => r.competition],
+    ['List', (r) => r.list],
+    ['Updated', (r) => r.updated],
+    ['Seed', (r) => r.seed],
+    ['Country', (r) => r.country.toUpperCase()],
+    ['Tool', (r) => r.tool],
+    ['Group', (r) => r.group],
+    ['Batch', (r) => r.batch],
+    ['Source', (r) => r.source],
+    ['Read at', (r) => new Date(r.at).toISOString()],
+  ]
+  const filled = (v: unknown) => v !== undefined && v !== null && v !== ''
+  const used = cols.filter(([, get]) => rows.some((r) => filled(get(r))))
+  const aoa = [used.map(([h]) => h), ...rows.map((r) => used.map(([, get]) => get(r) ?? ''))]
+
+  const ws = XLSX.utils.aoa_to_sheet(aoa)
+  ws['!cols'] = used.map(([h]) => ({ wch: h === 'Keyword' ? 40 : Math.max(10, h.length + 2) }))
+  ws['!autofilter'] = { ref: XLSX.utils.encode_range({ s: { r: 0, c: 0 }, e: { r: rows.length, c: used.length - 1 } }) }
+
+  // Distinct countries present in rows, sorted
+  const countryCodes = Array.from(new Set(rows.map((r) => r.country.toUpperCase()))).sort()
+
+  // Distinct row items: prefer tool name, fallback to seed
+  const itemMap = new Map<string, { tool: string; group?: string; batch?: string; byCountry: Map<string, import('./keywords').KeywordRow[]> }>()
+
+  for (const r of rows) {
+    const key = (r.tool || r.seed).trim()
+    if (!itemMap.has(key)) {
+      itemMap.set(key, {
+        tool: key,
+        group: r.group,
+        batch: r.batch,
+        byCountry: new Map(),
+      })
+    }
+    const item = itemMap.get(key)!
+    const c = r.country.toUpperCase()
+    if (!item.byCountry.has(c)) {
+      item.byCountry.set(c, [])
+    }
+    item.byCountry.get(c)!.push(r)
+  }
+
+  const items = Array.from(itemMap.values())
+  const hasMeta = items.some((it) => it.group || it.batch)
+
+  // --- Sheet 1: Volume Matrix (Tool/Keyword x Country) ---
+  const volHeaders = [
+    'Tool / Keyword',
+    ...(hasMeta ? ['Group', 'Batch'] : []),
+    ...countryCodes,
+    'Total Global Volume',
+  ]
+
+  const volRows = items.map((it) => {
+    let rowTotal = 0
+    const countryCells = countryCodes.map((c) => {
+      const cRows = it.byCountry.get(c) || []
+      const sum = cRows.reduce((acc, curr) => acc + (curr.volume || 0), 0)
+      rowTotal += sum
+      return sum > 0 ? sum : ''
+    })
+
+    return [
+      it.tool,
+      ...(hasMeta ? [it.group || '', it.batch || ''] : []),
+      ...countryCells,
+      rowTotal > 0 ? rowTotal : '',
+    ]
+  })
+
+  const volWs = XLSX.utils.aoa_to_sheet([volHeaders, ...volRows])
+  volWs['!cols'] = [
+    { wch: 35 },
+    ...(hasMeta ? [{ wch: 18 }, { wch: 10 }] : []),
+    ...countryCodes.map(() => ({ wch: 14 })),
+    { wch: 20 },
+  ]
+  volWs['!autofilter'] = { ref: XLSX.utils.encode_range({ s: { r: 0, c: 0 }, e: { r: volRows.length, c: volHeaders.length - 1 } }) }
+
+  // --- Sheet 2: Keyword Ideas Matrix (Phrase Match) ---
+  const phraseHeaders = [
+    'Tool / Keyword',
+    ...(hasMeta ? ['Group', 'Batch'] : []),
+    ...countryCodes,
+  ]
+
+  const phraseRows = items.map((it) => {
+    const countryCells = countryCodes.map((c) => {
+      const cRows = (it.byCountry.get(c) || []).filter((r) => r.list === 'Phrase match')
+      if (!cRows.length) return ''
+      return cRows.map((r) => r.volume ? `${r.keyword} (${r.volumeText || r.volume})` : r.keyword).join('\n')
+    })
+
+    return [
+      it.tool,
+      ...(hasMeta ? [it.group || '', it.batch || ''] : []),
+      ...countryCells,
+    ]
+  })
+
+  const phraseWs = XLSX.utils.aoa_to_sheet([phraseHeaders, ...phraseRows])
+  phraseWs['!cols'] = [
+    { wch: 35 },
+    ...(hasMeta ? [{ wch: 18 }, { wch: 10 }] : []),
+    ...countryCodes.map(() => ({ wch: 32 })),
+  ]
+  phraseWs['!autofilter'] = { ref: XLSX.utils.encode_range({ s: { r: 0, c: 0 }, e: { r: phraseRows.length, c: phraseHeaders.length - 1 } }) }
+
+  // --- Sheet 3: Questions Matrix ---
+  const qHeaders = [
+    'Tool / Keyword',
+    ...(hasMeta ? ['Group', 'Batch'] : []),
+    ...countryCodes,
+  ]
+
+  const qRows = items.map((it) => {
+    const countryCells = countryCodes.map((c) => {
+      const cRows = (it.byCountry.get(c) || []).filter((r) => r.list === 'Questions')
+      if (!cRows.length) return ''
+      return cRows.map((r) => r.volume ? `${r.keyword} (${r.volumeText || r.volume})` : r.keyword).join('\n')
+    })
+
+    return [
+      it.tool,
+      ...(hasMeta ? [it.group || '', it.batch || ''] : []),
+      ...countryCells,
+    ]
+  })
+
+  const qWs = XLSX.utils.aoa_to_sheet([qHeaders, ...qRows])
+  qWs['!cols'] = [
+    { wch: 35 },
+    ...(hasMeta ? [{ wch: 18 }, { wch: 10 }] : []),
+    ...countryCodes.map(() => ({ wch: 35 })),
+  ]
+  qWs['!autofilter'] = { ref: XLSX.utils.encode_range({ s: { r: 0, c: 0 }, e: { r: qRows.length, c: qHeaders.length - 1 } }) }
+
+  const wb = XLSX.utils.book_new()
+  XLSX.utils.book_append_sheet(wb, volWs, 'Volume Matrix')
+  XLSX.utils.book_append_sheet(wb, phraseWs, 'Keywords Matrix')
+  XLSX.utils.book_append_sheet(wb, qWs, 'Questions Matrix')
+  XLSX.utils.book_append_sheet(wb, ws, 'All Keywords Detail')
+
+  return XLSX.write(wb, { type: 'array', bookType: 'xlsx' }) as ArrayBuffer
 }

@@ -13,6 +13,11 @@
       <span class="count" id="count"></span>
     </header>
 
+    <div style="padding: 6px 12px; background: rgba(99, 102, 241, 0.12); border-bottom: 1px solid rgba(99, 102, 241, 0.25); display: flex; align-items: center; justify-content: space-between;">
+      <span style="font-size: 11px; font-weight: 600; color: #818CF8;">Full Web Dashboard</span>
+      <a href="http://localhost:5221" target="_blank" style="font-size: 11px; font-weight: 700; color: #fff; background: #6366F1; padding: 3px 8px; border-radius: 4px; text-decoration: none;">Open Studio ↗</a>
+    </div>
+
     <div class="seg views">
       <button data-view="run" class="on">Research</button>
       <button data-view="sources">Sources</button>
@@ -21,16 +26,20 @@
     <!-- Research -->
     <section class="view" id="run">
       <div class="plate">
-        <h2>The long tail, by country</h2>
-        <p>Upload your seeds. Get every phrase people actually search.</p>
+        <h2>Keyword ideas, by country</h2>
+        <p>Type a keyword, pick a market, get an Excel file.</p>
         <div class="steps">
-          <span class="stepchip"><b>1</b> Upload seeds</span>
-          <span class="stepchip"><b>2</b> Pick a country</span>
-          <span class="stepchip"><b>3</b> Export</span>
+          <span class="stepchip"><b>1</b> Keyword</span>
+          <span class="stepchip"><b>2</b> Country</span>
+          <span class="stepchip"><b>3</b> Excel</span>
         </div>
       </div>
 
-      <label>Country <span class="hint">used for rows whose sheet leaves it blank</span>
+      <label>Keyword <span class="hint">one per line for several</span>
+        <textarea id="keywords" rows="2" placeholder="protein powder"></textarea>
+      </label>
+
+      <label>Country
         <select id="country"></select>
       </label>
 
@@ -43,7 +52,7 @@
              accept=".csv,.tsv,.txt,.xlsx,.xlsm,.xls,.ods,text/csv,text/tab-separated-values" />
 
       <div id="pick">
-        <button type="button" class="choose" id="choose">Choose a sheet…</button>
+        <button type="button" class="choose" id="choose">…or upload a sheet of seeds</button>
         <p class="hint" id="sheet-hint"></p>
         <button type="button" class="linkish" id="template">Download a template</button>
       </div>
@@ -64,13 +73,15 @@
       <div id="progress" hidden>
         <div class="bar"><span id="bar-fill"></span></div>
         <div class="hint" id="progress-note"></div>
+        <div class="warn-box" id="live" hidden></div>
       </div>
 
       <div id="results" hidden>
         <div class="resrow">
           <span class="summary" id="res-count"></span>
-          <button type="button" class="go small" id="export">Export CSV</button>
+          <button type="button" class="go small" id="export">Download Excel</button>
         </div>
+        <button type="button" class="linkish" id="export-csv">or CSV</button>
         <ul class="kw" id="kw"></ul>
         <ul class="problems" id="notes" hidden></ul>
         <button type="button" class="linkish" id="clear">Clear run</button>

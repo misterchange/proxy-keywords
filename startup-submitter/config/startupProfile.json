@@ -1,0 +1,31 @@
+{
+  "startup": {
+    "name": "ProxyKeywords Studio",
+    "url": "https://proxykeywords.io",
+    "tagline": "Automated Multi-Country Stealth Keyword Research Engine",
+    "descriptionShort": "Extract search volume, KD, and keyword ideas across 150+ countries without getting blocked by anti-bot systems.",
+    "descriptionLong": "ProxyKeywords Studio is an intelligent SEO intelligence and keyword automation engine. By utilizing a stealth browser pipeline with persistent context and anti-bot cloaking, it enables marketing agencies and developers to conduct deep competitive research across Google, Ahrefs, and search platforms in bulk, streaming real-time metrics into consolidated reports.",
+    "category": "SEO & Marketing",
+    "pricingModel": "Freemium",
+    "tags": ["seo", "keyword research", "marketing", "developer tools", "automation", "growth"],
+    "twitterUrl": "https://twitter.com/proxykeywords",
+    "githubUrl": "https://github.com/my-org/proxy-keywords"
+  },
+  "founder": {
+    "name": "Nitin",
+    "email": "nitin@example.com",
+    "password": "SecurePassword123!",
+    "location": "India"
+  },
+  "assets": {
+    "logoPath": "",
+    "screenshotPath": ""
+  },
+  "settings": {
+    "headless": false,
+    "delayBetweenSitesMs": 5000,
+    "solveCaptcha": true,
+    "twoCaptchaApiKey": ""
+  }
+}
+

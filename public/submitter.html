@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Startup Auto-Submitter & Backlink Engine</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    :root {
+      --bg: #090d16;
+      --card: #111827;
+      --border: #1f2937;
+      --primary: #38bdf8;
+    }
+    body {
+      background-color: var(--bg);
+      color: #f3f4f6;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .glass-panel {
+      background-color: rgba(17, 24, 39, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #0b0f19;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #374151;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body class="min-h-screen p-4 md:p-8">
+
+  <div class="max-w-7xl mx-auto space-y-6">
+
+    <!-- Top Navigation -->
+    <header class="flex flex-col md:flex-row md:items-center justify-between pb-6 border-b border-gray-800 gap-4">
+      <div>
+        <div class="flex items-center gap-2 mb-1">
+          <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-950 text-emerald-400 border border-emerald-800">
+            Backlink Agent Live
+          </span>
+          <span class="text-xs text-gray-400">Powered by PlacesToPostYourStartup & CloakBrowser</span>
+        </div>
+        <h1 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight flex items-center gap-2">
+          <span>🚀</span> Startup Auto-Submitter & Backlink Studio
+        </h1>
+        <p class="text-xs md:text-sm text-gray-400 mt-1">
+          Automatically register and submit your startup across 100+ high-authority platforms to build your backlink profile.
+        </p>
+      </div>
+
+      <!-- Quick Action / Status -->
+      <div class="flex items-center gap-3">
+        <div id="sse-badge" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gray-900 border border-gray-800 text-xs text-gray-300">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Live SSE Connected
+        </div>
+        <a href="/home" class="px-3 py-1.5 rounded-lg bg-gray-800 hover:bg-gray-700 text-xs font-semibold text-gray-200 border border-gray-700 transition">
+          &larr; Keyword Studio
+        </a>
+      </div>
+    </header>
+
+    <!-- Stats Bar -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="p-4 rounded-xl glass-panel">
+        <div class="text-xs text-gray-400 font-medium">Directory Targets</div>
+        <div class="text-2xl font-black text-white mt-1" id="stat-total">101</div>
+        <div class="text-[11px] text-sky-400 mt-0.5">High DA & Startup Hubs</div>
+      </div>
+      <div class="p-4 rounded-xl glass-panel">
+        <div class="text-xs text-gray-400 font-medium">Direct Submission Forms</div>
+        <div class="text-2xl font-black text-emerald-400 mt-1" id="stat-direct">25</div>
+        <div class="text-[11px] text-gray-400 mt-0.5">Instant Form Backlinks</div>
+      </div>
+      <div class="p-4 rounded-xl glass-panel">
+        <div class="text-xs text-gray-400 font-medium">Submissions Completed</div>
+        <div class="text-2xl font-black text-indigo-400 mt-1" id="stat-submitted">0</div>
+        <div class="text-[11px] text-indigo-300 mt-0.5" id="stat-status-sub">Ready to launch</div>
+      </div>
+      <div class="p-4 rounded-xl glass-panel">
+        <div class="text-xs text-gray-400 font-medium">Proof Receipts Captured</div>
+        <div class="text-2xl font-black text-amber-400 mt-1" id="stat-proofs">0</div>
+        <div class="text-[11px] text-amber-300 mt-0.5">Visual Screenshots</div>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="flex border-b border-gray-800 space-x-6 text-sm font-semibold">
+      <button onclick="switchTab('dirs')" id="tab-dirs" class="pb-3 border-b-2 border-sky-400 text-sky-400 transition-colors">
+        1. Directory Explorer (101 Sites)
+      </button>
+      <button onclick="switchTab('profile')" id="tab-profile" class="pb-3 border-b-2 border-transparent text-gray-400 hover:text-white transition-colors">
+        2. Startup Profile Setup
+      </button>
+      <button onclick="switchTab('run')" id="tab-run" class="pb-3 border-b-2 border-transparent text-gray-400 hover:text-white transition-colors flex items-center gap-1.5">
+        3. Live Submissions Console <span id="run-active-dot" class="w-2 h-2 rounded-full bg-emerald-400 hidden animate-pulse"></span>
+      </button>
+      <button onclick="switchTab('proofs')" id="tab-proofs" class="pb-3 border-b-2 border-transparent text-gray-400 hover:text-white transition-colors">
+        4. Proofs & Ledgers Gallery
+      </button>
+    </div>
+
+    <!-- TAB 1: DIRECTORIES EXPLORER -->
+    <div id="view-dirs" class="space-y-4">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <!-- Search & Filter Controls -->
+        <div class="flex flex-wrap items-center gap-2">
+          <input type="text" id="dir-search" oninput="filterDirectories()" placeholder="Search directory name or URL..." class="px-3 py-1.5 rounded-lg bg-gray-900 border border-gray-800 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-sky-500 w-64">
+          <select id="dir-type-filter" onchange="filterDirectories()" class="px-3 py-1.5 rounded-lg bg-gray-900 border border-gray-800 text-xs text-gray-200 focus:outline-none focus:border-sky-500">
+            <option value="all">All Platforms (101)</option>
+            <option value="direct-form">Direct Form Only (Fastest)</option>
+            <option value="account-required">Account Required</option>
+            <option value="reddit">Reddit Communities</option>
+          </select>
+        </div>
+
+        <!-- Batch Launcher Bar -->
+        <div class="flex items-center gap-2">
+          <button onclick="launchBatch('direct-form', 5)" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white transition shadow-lg shadow-emerald-950">
+            ⚡ Quick Launch (First 5 Direct Sites)
+          </button>
+          <button onclick="switchTab('run')" class="px-3 py-1.5 rounded-lg bg-sky-500 hover:bg-sky-400 text-xs font-bold text-gray-950 transition">
+            Go to Submissions Runner &rarr;
+          </button>
+        </div>
+      </div>
+
+      <!-- Directories Table -->
+      <div class="glass-panel rounded-xl overflow-hidden border border-gray-800">
+        <div class="overflow-x-auto max-h-[550px] custom-scroll">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-gray-900/90 text-gray-400 sticky top-0 uppercase text-[10px] tracking-wider border-b border-gray-800">
+              <tr>
+                <th class="py-3 px-4">Directory Name</th>
+                <th class="py-3 px-4">Submission URL</th>
+                <th class="py-3 px-4">Type</th>
+                <th class="py-3 px-4 text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody id="directories-tbody" class="divide-y divide-gray-800/60 font-mono">
+              <tr>
+                <td colspan="4" class="p-6 text-center text-gray-500">Loading directories catalog...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: STARTUP PROFILE SETUP -->
+    <div id="view-profile" class="space-y-6 hidden">
+      <div class="glass-panel p-6 rounded-2xl border border-gray-800 space-y-6">
+        <div class="flex items-center justify-between pb-4 border-b border-gray-800">
+          <div>
+            <h2 class="text-lg font-bold text-white">Startup Information & Branding</h2>
+            <p class="text-xs text-gray-400">This data is automatically filled into directory forms by our stealth browser agent.</p>
+          </div>
+          <button onclick="saveProfile()" id="save-profile-btn" class="px-4 py-2 rounded-xl bg-sky-500 hover:bg-sky-400 text-xs font-bold text-gray-950 transition flex items-center gap-1.5">
+            <span>💾</span> Save Profile Configuration
+          </button>
+        </div>
+
+        <form id="profile-form" class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+          <!-- Startup Name -->
+          <div class="space-y-1">
+            <label class="block text-gray-300 font-semibold">Startup / Tool Name *</label>
+            <input type="text" id="prof-name" class="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-800 text-white focus:outline-none focus:border-sky-500">
+          </div>
+
+          <!-- Website URL -->
+          <div class="space-y-1">
+            <label class="block text-gray-300 font-semibold">Website URL *</label>
+            <input type="url" id="prof-url" class="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-800 text-white focus:outline-none focus:border-sky-500" placeholder="https://">
+          </div>
+
+          <!-- Tagline -->
+          <div class="md:col-span-2 space-y-1">
+            <label class="block text-gray-300 font-semibold">Punchy Tagline (One-Liner Pitch) *</label>
+            <input type="text" id="prof-tagline" class="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-800 text-white focus:outline-none focus:border-sky-500">
+          </div>
+
+          <!-- Short Description -->
+          <div class="space-y-1">
+            <label class="block text-gray-300 font-semibold">Short Pitch (under 250 chars)</label>
+            <textarea id="prof-short" rows="3" class="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-800 text-white focus:outline-none focus:border-sky-500"></textarea>
+          </div>
+
+          <!-- Long Description -->
+          <div class="space-y-1">
+            <label class="block text-gray-300 font-semibold">Comprehensive Overview (500+ chars)</label>
+            <textarea id="prof-long" rows="3" class="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-800 text-white focus:outline-none focus:border-sky-500"></textarea>
+          </div>
+
+          <!-- Category -->
+          <div class="space-y-1">
+            <label class="block text-gray-300 font-semibold">Primary Category</label>
+            <input type="text" id="prof-category" class="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-800 text-white focus:outline-none focus:border-sky-500" placeholder="e.g. SEO, AI, SaaS, Developer Tools">
+          </div>
+
+          <!-- Pricing Model -->
+          <div class="space-y-1">
+            <label class="block text-gray-300 font-semibold">Pricing Model</label>
+            <select id="prof-pricing" class="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-800 text-white focus:outline-none focus:border-sky-500">
+              <option value="Freemium">Freemium</option>
+              <option value="Free">100% Free</option>
+              <option value="Paid">Paid / Subscription</option>
+              <option value="Free Trial">Free Trial</option>
+            </select>
+          </div>
+
+          <!-- Tags -->
+          <div class="space-y-1">
+            <label class="block text-gray-300 font-semibold">Tags / Keywords (comma separated)</label>
+            <input type="text" id="prof-tags" class="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-800 text-white focus:outline-none focus:border-sky-500" placeholder="seo, automation, marketing, saas">
+          </div>
+
+          <!-- Twitter URL -->
+          <div class="space-y-1">
+            <label class="block text-gray-300 font-semibold">Twitter / X URL</label>
+            <input type="url" id="prof-twitter" class="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-800 text-white focus:outline-none focus:border-sky-500">
+          </div>
+
+          <!-- Founder Name -->
+          <div class="space-y-1">
+            <label class="block text-gray-300 font-semibold">Founder Name</label>
+            <input type="text" id="prof-founder-name" class="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-800 text-white focus:outline-none focus:border-sky-500">
+          </div>
+
+          <!-- Founder Email -->
+          <div class="space-y-1">
+            <label class="block text-gray-300 font-semibold">Registration / Contact Email *</label>
+            <input type="email" id="prof-founder-email" class="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-800 text-white focus:outline-none focus:border-sky-500">
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- TAB 3: LIVE SUBMISSIONS CONSOLE -->
+    <div id="view-run" class="space-y-6 hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+        <!-- Controls Box -->
+        <div class="glass-panel p-5 rounded-2xl border border-gray-800 space-y-4">
+          <h2 class="text-sm font-bold text-white uppercase tracking-wider text-gray-400">Launch Submissions</h2>
+
+          <!-- Mode / Scope -->
+          <div class="space-y-1">
+            <label class="block text-xs text-gray-300 font-semibold">Target Scope</label>
+            <select id="run-scope" class="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-800 text-xs text-white">
+              <option value="direct-form">Direct Form Directories Only (Fastest)</option>
+              <option value="all">All 101 Directories</option>
+              <option value="account-required">Account Required Platforms</option>
+            </select>
+          </div>
+
+          <!-- Limit -->
+          <div class="space-y-1">
+            <label class="block text-xs text-gray-300 font-semibold">Batch Limit (Max Sites)</label>
+            <input type="number" id="run-limit" value="5" min="1" max="101" class="w-full px-3 py-2 rounded-lg bg-gray-900 border border-gray-800 text-xs text-white">
+          </div>
+
+          <!-- Headless toggle -->
+          <div class="flex items-center justify-between p-3 rounded-lg bg-gray-900/60 border border-gray-800">
+            <div>
+              <div class="text-xs font-semibold text-white">Headless Mode</div>
+              <div class="text-[11px] text-gray-500">Run quietly in background</div>
+            </div>
+            <input type="checkbox" id="run-headless" class="w-4 h-4 rounded text-sky-500 focus:ring-0">
+          </div>
+
+          <!-- Start / Stop Buttons -->
+          <div class="pt-2 space-y-2">
+            <button onclick="startSubmissionRun()" id="start-run-btn" class="w-full py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 font-bold text-xs text-gray-950 transition shadow-lg shadow-sky-950 flex items-center justify-center gap-1.5">
+              <span>▶</span> Launch Submission Run
+            </button>
+            <button onclick="stopSubmissionRun()" id="stop-run-btn" class="w-full py-2 rounded-xl bg-rose-600/20 hover:bg-rose-600/40 text-rose-400 border border-rose-800/40 font-bold text-xs transition hidden">
+              ■ Terminate Process
+            </button>
+          </div>
+        </div>
+
+        <!-- Live Terminal Stream & Progress -->
+        <div class="lg:col-span-2 glass-panel p-5 rounded-2xl border border-gray-800 space-y-4 flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between pb-2 border-b border-gray-800">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="font-bold text-xs text-white uppercase tracking-wider">Live Execution Terminal</span>
+              </div>
+              <span id="run-current-label" class="text-xs text-sky-400 font-mono">Idle</span>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="space-y-1">
+              <div class="flex justify-between text-[11px] text-gray-400 font-mono">
+                <span>Progress</span>
+                <span id="run-progress-text">0 / 0</span>
+              </div>
+              <div class="w-full h-2 rounded-full bg-gray-800 overflow-hidden">
+                <div id="run-progress-bar" class="h-full bg-sky-500 transition-all duration-300" style="width: 0%"></div>
+              </div>
+            </div>
+
+            <!-- Terminal Output Window -->
+            <div id="terminal-logs" class="bg-black/80 rounded-xl p-4 font-mono text-xs text-emerald-400 h-[320px] overflow-y-auto custom-scroll border border-gray-800 space-y-1">
+              <div class="text-gray-500">[System] Terminal ready. Awaiting submission task...</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- TAB 4: PROOFS & LEDGERS GALLERY -->
+    <div id="view-proofs" class="space-y-6 hidden">
+      <div class="flex items-center justify-between pb-4 border-b border-gray-800">
+        <div>
+          <h2 class="text-lg font-bold text-white">Visual Proof Receipts & History</h2>
+          <p class="text-xs text-gray-400">Screenshots captured by the stealth browser after each submission.</p>
+        </div>
+        <button onclick="loadProofs()" class="px-3 py-1.5 rounded-lg bg-gray-800 hover:bg-gray-700 text-xs font-semibold text-gray-200 border border-gray-700 transition">
+          ↻ Refresh Gallery
+        </button>
+      </div>
+
+      <div id="proofs-grid" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Image Modal Viewer -->
+  <div id="image-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4" onclick="closeModal()">
+    <div class="max-w-4xl max-h-[90vh] bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden p-2" onclick="event.stopPropagation()">
+      <div class="flex justify-between items-center px-3 py-2 border-b border-gray-800 mb-2">
+        <span id="modal-title" class="text-xs font-mono text-gray-300">Proof Screenshot</span>
+        <button onclick="closeModal()" class="text-gray-400 hover:text-white font-bold">&times;</button>
+      </div>
+      <img id="modal-img" src="" class="max-h-[80vh] w-auto rounded-lg mx-auto object-contain">
+    </div>
+  </div>
+
+  <script>
+    let directoriesData = [];
+    let currentProfile = null;
+
+    // Tab Navigation
+    function switchTab(tab) {
+      ['dirs', 'profile', 'run', 'proofs'].forEach(t => {
+        document.getElementById(`view-${t}`).classList.add('hidden');
+        document.getElementById(`tab-${t}`).classList.remove('border-sky-400', 'text-sky-400');
+        document.getElementById(`tab-${t}`).classList.add('border-transparent', 'text-gray-400');
+      });
+      document.getElementById(`view-${tab}`).classList.remove('hidden');
+      document.getElementById(`tab-${tab}`).classList.add('border-sky-400', 'text-sky-400');
+      document.getElementById(`tab-${tab}`).classList.remove('border-transparent', 'text-gray-400');
+
+      if (tab === 'proofs') loadProofs();
+    }
+
+    // Load Initial Data
+    async function init() {
+      // Load Directories
+      try {
+        const res = await fetch('/api/submitter/directories');
+        const data = await res.json();
+        if (data.success) {
+          directoriesData = data.directories;
+          renderDirectories(directoriesData);
+          document.getElementById('stat-total').innerText = directoriesData.length;
+          document.getElementById('stat-direct').innerText = directoriesData.filter(d => d.type === 'direct-form').length;
+        }
+      } catch (e) {
+        console.error('Failed to load directories', e);
+      }
+
+      // Load Profile
+      try {
+        const res = await fetch('/api/submitter/profile');
+        const data = await res.json();
+        if (data.success) {
+          currentProfile = data.profile;
+          populateProfileForm(data.profile);
+        }
+      } catch (e) {
+        console.error('Failed to load profile', e);
+      }
+
+      // Connect SSE
+      connectSSE();
+      loadProofs();
+    }
+
+    // Render Directories Table
+    function renderDirectories(list) {
+      const tbody = document.getElementById('directories-tbody');
+      if (!list.length) {
+        tbody.innerHTML = '<tr><td colspan="4" class="p-6 text-center text-gray-500">No matching directories found.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = list.map(d => {
+        const typeBadge = d.type === 'direct-form' 
+          ? '<span class="px-2 py-0.5 rounded text-[10px] bg-emerald-950 text-emerald-400 border border-emerald-800">Direct Form</span>'
+          : d.type === 'reddit'
+          ? '<span class="px-2 py-0.5 rounded text-[10px] bg-orange-950 text-orange-400 border border-orange-800">Reddit</span>'
+          : '<span class="px-2 py-0.5 rounded text-[10px] bg-indigo-950 text-indigo-400 border border-indigo-800">Account Req</span>';
+
+        return `
+          <tr class="hover:bg-gray-900/60 transition">
+            <td class="py-3 px-4 font-semibold text-gray-200">${d.name}</td>
+            <td class="py-3 px-4 text-gray-400">
+              <a href="${d.url}" target="_blank" class="hover:text-sky-400 transition truncate max-w-xs block">${d.url}</a>
+            </td>
+            <td class="py-3 px-4">${typeBadge}</td>
+            <td class="py-3 px-4 text-right">
+              <button onclick="launchSingle('${d.id}')" class="px-2.5 py-1 rounded bg-gray-800 hover:bg-sky-500 hover:text-gray-950 text-gray-300 text-[11px] font-bold transition">
+                Submit &rarr;
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // Filter Directories
+    function filterDirectories() {
+      const query = document.getElementById('dir-search').value.toLowerCase();
+      const type = document.getElementById('dir-type-filter').value;
+
+      const filtered = directoriesData.filter(d => {
+        const matchesQuery = d.name.toLowerCase().includes(query) || d.url.toLowerCase().includes(query);
+        const matchesType = type === 'all' || d.type === type;
+        return matchesQuery && matchesType;
+      });
+
+      renderDirectories(filtered);
+    }
+
+    // Populate Profile Form
+    function populateProfileForm(p) {
+      if (!p) return;
+      document.getElementById('prof-name').value = p.startup?.name || '';
+      document.getElementById('prof-url').value = p.startup?.url || '';
+      document.getElementById('prof-tagline').value = p.startup?.tagline || '';
+      document.getElementById('prof-short').value = p.startup?.descriptionShort || '';
+      document.getElementById('prof-long').value = p.startup?.descriptionLong || '';
+      document.getElementById('prof-category').value = p.startup?.category || '';
+      document.getElementById('prof-pricing').value = p.startup?.pricingModel || 'Freemium';
+      document.getElementById('prof-tags').value = (p.startup?.tags || []).join(', ');
+      document.getElementById('prof-twitter').value = p.startup?.twitterUrl || '';
+      document.getElementById('prof-founder-name').value = p.founder?.name || '';
+      document.getElementById('prof-founder-email').value = p.founder?.email || '';
+    }
+
+    // Save Profile
+    async function saveProfile() {
+      const updated = {
+        startup: {
+          name: document.getElementById('prof-name').value,
+          url: document.getElementById('prof-url').value,
+          tagline: document.getElementById('prof-tagline').value,
+          descriptionShort: document.getElementById('prof-short').value,
+          descriptionLong: document.getElementById('prof-long').value,
+          category: document.getElementById('prof-category').value,
+          pricingModel: document.getElementById('prof-pricing').value,
+          tags: document.getElementById('prof-tags').value.split(',').map(s => s.trim()).filter(Boolean),
+          twitterUrl: document.getElementById('prof-twitter').value,
+        },
+        founder: {
+          name: document.getElementById('prof-founder-name').value,
+          email: document.getElementById('prof-founder-email').value,
+        },
+        settings: currentProfile?.settings || { delayBetweenSitesMs: 4000 }
+      };
+
+      const btn = document.getElementById('save-profile-btn');
+      btn.innerText = 'Saving...';
+
+      try {
+        const res = await fetch('/api/submitter/profile', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updated)
+        });
+        const d = await res.json();
+        if (d.success) {
+          btn.innerText = '✔ Saved Successfully!';
+          setTimeout(() => btn.innerHTML = '<span>💾</span> Save Profile Configuration', 2000);
+        }
+      } catch (e) {
+        alert('Error saving profile');
+      }
+    }
+
+    // Start Submission Run
+    async function startSubmissionRun(customParams = {}) {
+      switchTab('run');
+
+      const scope = customParams.type || document.getElementById('run-scope').value;
+      const limit = customParams.limit || parseInt(document.getElementById('run-limit').value, 10);
+      const site = customParams.site || undefined;
+      const headless = document.getElementById('run-headless').checked;
+
+      const payload = { type: scope, limit, site, headless };
+
+      document.getElementById('start-run-btn').classList.add('hidden');
+      document.getElementById('stop-run-btn').classList.remove('hidden');
+      document.getElementById('run-active-dot').classList.remove('hidden');
+
+      try {
+        const res = await fetch('/api/submitter/run', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const d = await res.json();
+        if (!d.success) {
+          alert(d.message);
+          resetRunButtons();
+        }
+      } catch (e) {
+        alert('Failed to launch run');
+        resetRunButtons();
+      }
+    }
+
+    function launchBatch(type, limit) {
+      startSubmissionRun({ type, limit });
+    }
+
+    function launchSingle(siteId) {
+      startSubmissionRun({ site: siteId, limit: 1 });
+    }
+
+    async function stopSubmissionRun() {
+      await fetch('/api/submitter/stop', { method: 'POST' });
+      resetRunButtons();
+    }
+
+    function resetRunButtons() {
+      document.getElementById('start-run-btn').classList.remove('hidden');
+      document.getElementById('stop-run-btn').classList.add('hidden');
+      document.getElementById('run-active-dot').classList.add('hidden');
+    }
+
+    // Connect Server-Sent Events (SSE)
+    function connectSSE() {
+      const sse = new EventSource('/api/submitter/stream');
+
+      sse.addEventListener('state', (e) => {
+        const state = JSON.parse(e.data);
+        updateStateUI(state);
+      });
+
+      sse.addEventListener('log', (e) => {
+        const log = JSON.parse(e.data);
+        appendTerminalLog(log);
+      });
+    }
+
+    function updateStateUI(state) {
+      if (!state) return;
+
+      document.getElementById('run-current-label').innerText = state.currentSite || 'Idle';
+      document.getElementById('stat-submitted').innerText = state.submittedCount || 0;
+
+      if (state.totalSites > 0) {
+        const pct = Math.round((state.currentIndex / state.totalSites) * 100);
+        document.getElementById('run-progress-bar').style.width = `${pct}%`;
+        document.getElementById('run-progress-text').innerText = `${state.currentIndex} / ${state.totalSites} (${pct}%)`;
+      }
+
+      if (state.status === 'running') {
+        document.getElementById('start-run-btn').classList.add('hidden');
+        document.getElementById('stop-run-btn').classList.remove('hidden');
+        document.getElementById('run-active-dot').classList.remove('hidden');
+        document.getElementById('stat-status-sub').innerText = 'Submissions in progress...';
+      } else {
+        resetRunButtons();
+        if (state.status === 'completed') {
+          document.getElementById('stat-status-sub').innerText = 'Last run completed';
+          loadProofs();
+        }
+      }
+    }
+
+    function appendTerminalLog(log) {
+      const term = document.getElementById('terminal-logs');
+      const row = document.createElement('div');
+      
+      let colorClass = 'text-emerald-400';
+      if (log.level === 'warn') colorClass = 'text-amber-300';
+      if (log.level === 'error') colorClass = 'text-rose-400';
+      if (log.level === 'success') colorClass = 'text-sky-300 font-bold';
+
+      row.className = `${colorClass} leading-tight`;
+      row.innerText = `[${log.time}] ${log.text}`;
+      term.appendChild(row);
+      term.scrollTop = term.scrollHeight;
+    }
+
+    // Load Proofs Gallery
+    async function loadProofs() {
+      try {
+        const res = await fetch('/api/submitter/proofs');
+        const d = await res.json();
+        if (d.success) {
+          document.getElementById('stat-proofs').innerText = d.proofs.length;
+          renderProofsGallery(d.proofs);
+        }
+      } catch (e) {
+        console.error('Failed to load proofs', e);
+      }
+    }
+
+    function renderProofsGallery(proofs) {
+      const grid = document.getElementById('proofs-grid');
+      if (!proofs.length) {
+        grid.innerHTML = '<div class="col-span-3 p-8 text-center text-gray-500 glass-panel rounded-2xl">No proof receipts captured yet. Launch a submission to generate proof screenshots!</div>';
+        return;
+      }
+
+      grid.innerHTML = proofs.map(p => `
+        <div class="glass-panel p-3 rounded-xl border border-gray-800 space-y-2 hover:border-sky-500/50 transition cursor-pointer" onclick="openModal('${p.url}', '${p.site}')">
+          <div class="flex items-center justify-between text-xs pb-1 border-b border-gray-800">
+            <span class="font-bold text-white uppercase">${p.site}</span>
+            <span class="text-[11px] text-gray-400">${new Date(p.mtime).toLocaleTimeString()}</span>
+          </div>
+          <div class="h-40 rounded-lg overflow-hidden bg-black/60 relative group">
+            <img src="${p.url}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" alt="Proof receipt">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-xs font-bold text-white transition">
+              🔍 Click to Inspect
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openModal(src, title) {
+      document.getElementById('modal-img').src = src;
+      document.getElementById('modal-title').innerText = `Proof Receipt: ${title}`;
+      document.getElementById('image-modal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('image-modal').classList.add('hidden');
+    }
+
+    // Initialize on load
+    init();
+  </script>
+</body>
+</html>
+

@@ -9,7 +9,7 @@
 
 import { COUNTRIES, type KeywordRow } from '../lib/keywords'
 import { DEFAULT_SOURCE_ID, REJECTED, ROADMAP, SOURCES } from '../lib/registry'
-import { SHEET_HINT, SHEET_TEMPLATE_CSV, parseSeedFile, toCsv, type SheetParse } from '../lib/sheet'
+import { SHEET_HINT, SHEET_TEMPLATE_CSV, parseSeedFile, toCsv, toXlsx, type SeedRow, type SheetParse } from '../lib/sheet'
 
 const $ = <T extends HTMLElement>(sel: string) => document.querySelector<T>(sel)!
 
@@ -23,6 +23,7 @@ interface Run {
   status: string
   rows: KeywordRow[]
   notes: Array<{ seed: string; kind: string; detail: string }>
+  live?: string
 }
 
 let parsed: SheetParse | null = null
@@ -145,18 +146,46 @@ fileInput.addEventListener('change', async () => {
   refreshGo()
 })
 
+/* ---- typed keywords ------------------------------------------------- */
+
+const keywordBox = $<HTMLTextAreaElement>('#keywords')
+
+/** Typed keywords win over a loaded sheet — the box is the quicker, more deliberate input. */
+function typedSeeds(): SeedRow[] {
+  const seen = new Set<string>()
+  const out: SeedRow[] = []
+  for (const line of keywordBox.value.split('\n')) {
+    const keyword = line.replace(/\s+/g, ' ').trim()
+    if (!keyword || seen.has(keyword.toLowerCase())) continue
+    seen.add(keyword.toLowerCase())
+    out.push({ row: out.length + 1, keyword })
+  }
+  return out
+}
+
+keywordBox.addEventListener('input', refreshGo)
+keywordBox.addEventListener('keydown', (e) => {
+  // Enter runs; Shift+Enter adds a line for another keyword.
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault()
+    if (!$<HTMLButtonElement>('#go').disabled) $('#go').click()
+  }
+})
+
 function refreshGo(): void {
-  const ok = Boolean(parsed && parsed.rows.length && !parsed.problems.length && hasChrome)
-  $<HTMLButtonElement>('#go').disabled = !ok
+  const sheetOk = Boolean(parsed && parsed.rows.length && !parsed.problems.length)
+  $<HTMLButtonElement>('#go').disabled = !hasChrome || !(typedSeeds().length || sheetOk)
 }
 
 /* ---- run ------------------------------------------------------------ */
 
 $('#go').addEventListener('click', async () => {
-  if (!parsed) return
+  const typed = typedSeeds()
+  const seeds = typed.length ? typed : parsed?.rows
+  if (!seeds?.length) return
   await chrome.runtime.sendMessage({
     channel: 'kw:start',
-    seeds: parsed.rows,
+    seeds,
     sourceId: sourceSel.value,
     defaultCountry: countrySel.value,
   })
@@ -169,15 +198,40 @@ $('#clear').addEventListener('click', async () => {
   render(null)
 })
 
-$('#export').addEventListener('click', async () => {
-  const { run } = (await chrome.runtime.sendMessage({ channel: 'kw:get' })) as { run: Run | null }
-  if (!run?.rows.length) return
-  const url = URL.createObjectURL(new Blob([toCsv(run.rows)], { type: 'text/csv' }))
+function download(blob: Blob, name: string): void {
+  const url = URL.createObjectURL(blob)
   const a = document.createElement('a')
   a.href = url
-  a.download = `keywords-${new Date().toISOString().slice(0, 10)}.csv`
+  a.download = name
   a.click()
   URL.revokeObjectURL(url)
+}
+
+/** "protein-powder-in-2026-10-15" for one seed, "keywords-2026-10-15" for many. */
+function exportName(run: Run, ext: string): string {
+  const day = new Date().toISOString().slice(0, 10)
+  const seeds = [...new Set(run.rows.map((r) => r.seed))]
+  const countries = [...new Set(run.rows.map((r) => r.country))]
+  const slug = (s: string) => s.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '-').replace(/^-|-$/g, '').slice(0, 40)
+  const base = seeds.length === 1 && countries.length === 1 ? `${slug(seeds[0]!)}-${countries[0]}` : 'keywords'
+  return `${base}-${day}.${ext}`
+}
+
+async function currentRun(): Promise<Run | null> {
+  const { run } = (await chrome.runtime.sendMessage({ channel: 'kw:get' })) as { run: Run | null }
+  return run?.rows.length ? run : null
+}
+
+$('#export').addEventListener('click', async () => {
+  const run = await currentRun()
+  if (!run) return
+  const type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+  download(new Blob([toXlsx(run.rows)], { type }), exportName(run, 'xlsx'))
+})
+
+$('#export-csv').addEventListener('click', async () => {
+  const run = await currentRun()
+  if (run) download(new Blob([toCsv(run.rows)], { type: 'text/csv' }), exportName(run, 'csv'))
 })
 
 /* ---- render --------------------------------------------------------- */
@@ -185,6 +239,8 @@ $('#export').addEventListener('click', async () => {
 function render(run: Run | null): void {
   const running = run?.status === 'running'
   $('#stop').hidden = !running
+  $('#live').hidden = !(running && run?.live)
+  $('#live').textContent = run?.live ?? ''
   $('#progress').hidden = !run
   $('#results').hidden = !run || !run.rows.length
 
@@ -211,7 +267,7 @@ function render(run: Run | null): void {
     k.textContent = r.keyword
     const c = document.createElement('span')
     c.className = 'kw-tag'
-    c.textContent = r.country
+    c.textContent = r.volumeText ? `${r.volumeText}${r.difficultyText ? ` · KD ${r.difficultyText}` : ''}` : r.country
     li.append(k, c)
     list.append(li)
   }
@@ -241,6 +297,7 @@ const LEGAL_LABEL: Record<string, string> = {
   'public-endpoint': 'public endpoint',
   'own-account': 'your own account',
   'licensed-api': 'licensed API',
+  'user-tab': 'your own tab',
   prohibited: 'not permitted',
 }
 
